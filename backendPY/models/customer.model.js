@@ -3,7 +3,7 @@ const {DataTypes} = require('sequelize');
 
 const Customer = sequelize.define("customer", {
     lastName: {
-        type: DataTypes.DECIMAL
+        type: DataTypes.STRING
     },
     firstName: {
         type: DataTypes.STRING
@@ -36,7 +36,7 @@ const Customer = sequelize.define("customer", {
         type: DataTypes.STRING
     },
     role: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.STRING
     }
 });
 

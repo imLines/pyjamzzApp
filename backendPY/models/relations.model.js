@@ -6,6 +6,7 @@ const Delivery = require('./delivery.model');
 const Product = require('./product.model');
 const Stock = require('./stock.model');
 const WishList = require('./wishlist.model');
+const ImagesProduct = require('./imagesProduct.model');
 
 Customer.hasOne(ShoppingCard);
 Payment.hasOne(Customer);
@@ -18,6 +19,6 @@ Product.hasMany(Stock);
 Customer.hasMany(WishList);
 WishList.hasOne(Product);
 
-
+Product.hasMany(ImagesProduct);
 
 
