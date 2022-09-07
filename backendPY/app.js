@@ -25,14 +25,16 @@ require('./models/product.model');
 require('./models/stock.model');
 require('./models/delivery.model');
 require('./models/relations.model');
-require('./models/wishlist.model');
+require('./models/wishList.model');
 require('./models/imagesProduct.model');
 require('./models/orderDetails.model');
+require('./models/wishList.model');
+require('./models/admin.model');
 
 //Routes
 require('./routes/customer.routes')(app);
 require('./routes/product.routes')(app);
-
+require('./routes/delivery.routes')(app);
 
 const {sequelize} = require('./models/model');
 sequelize.sync({force: false, alter: false})

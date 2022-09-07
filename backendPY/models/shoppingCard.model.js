@@ -7,4 +7,4 @@ const ShoppingCard = sequelize.define("shoppingCard", {
     }
 })
 
-module.exports = ShoppingCard;
+module.exports = ShoppingCard; 

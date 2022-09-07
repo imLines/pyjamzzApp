@@ -5,7 +5,7 @@ const Order = require('./payment.model');
 const Delivery = require('./delivery.model');
 const Product = require('./product.model');
 const Stock = require('./stock.model');
-const WishList = require('./wishlist.model');
+const WishList = require('./wishList.model');
 const ImagesProduct = require('./imagesProduct.model');
 
 Customer.hasOne(ShoppingCard);

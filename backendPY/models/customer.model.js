@@ -14,7 +14,7 @@ const Customer = sequelize.define("customer", {
     sex: {
         type: DataTypes.STRING
     },
-    adress: {
+    adress: { 
         type: DataTypes.STRING
     },
     adressComplement: {

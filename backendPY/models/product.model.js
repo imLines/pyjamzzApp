@@ -19,7 +19,7 @@ const Product = sequelize.define('product', {
     },
     novelty: {
         type: DataTypes.BOOLEAN
-    },
+    }, 
     color: {
         type: DataTypes.STRING
     }

@@ -19,7 +19,6 @@ exports.registration = async (req, res) => {
             if(user == null){
                     bcrypt.hash(PasswordNoHashed, 10)
                     .then(hashedPassword=>{
-                        console.log("LA")
                         const password = hashedPassword;
                         Customer.create({sex, lastName, firstName,  email, password, role})
                         .then(valid=>{
