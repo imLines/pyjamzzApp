@@ -15,6 +15,8 @@ app.listen(port, ()=>{
     console.log(`Listening to requests on http://localhost:${port}`)
 });
 
+
+//Models
 require('./models/customer.model');
 require('./models/shoppingCard.model');
 require('./models/payment.model');
@@ -25,8 +27,11 @@ require('./models/delivery.model');
 require('./models/relations.model');
 require('./models/wishlist.model');
 require('./models/imagesProduct.model');
+require('./models/orderDetails.model');
 
+//Routes
 require('./routes/customer.routes')(app);
+require('./routes/product.routes')(app);
 
 
 const {sequelize} = require('./models/model');

@@ -12,16 +12,13 @@ const Product = sequelize.define('product', {
         type: DataTypes.STRING
     },
     description: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING 
     },
     priceTTC: {
-        type: DataTypes.DECIMAL
+        type: DataTypes.FLOAT(10,2)
     },
-    new: {
+    novelty: {
         type: DataTypes.BOOLEAN
-    },
-    size: {
-        type: DataTypes.INTEGER
     },
     color: {
         type: DataTypes.STRING
