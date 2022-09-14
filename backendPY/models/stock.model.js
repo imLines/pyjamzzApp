@@ -3,7 +3,12 @@ const {DataTypes} = require('sequelize');
 
 const Stock = sequelize.define('stock', {
     stock: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    size: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 });
 

@@ -1,10 +1,12 @@
 const Product = require('../models/product.model');
+const Stock = require('../models/stock.model')
 
 exports.create = async (req, res)=>{
-    if(!req.body.name || !req.body.environment || !req.body.category || !req.body.description || !req.body.priceTTC || !req.body.novelty || !req.body.color){
+    if(!req.body.name || !req.body.environment || !req.body.category || !req.body.description || !req.body.priceTTC || !req.body.stock || !req.body.size || req.body.novelty == null || !req.body.color){
         console.log('Donnée manquante...');
         res.status(400).send({message: "Donnée manquante..."});
     }else {
+        //For the Product
         const name = req.body.name;
         const environment = req.body.environment;
         const category = req.body.category;
@@ -12,7 +14,9 @@ exports.create = async (req, res)=>{
         const priceTTC = req.body.priceTTC;
         const novelty = req.body.novelty; 
         const color = req.body.color;
-
+        //For the Stock
+        
+ 
         try{
             Product.findOne({raw: true, where: {name: name}})
             .then(data=>{
@@ -21,6 +25,10 @@ exports.create = async (req, res)=>{
                 }else{
                     Product.create({name, environment, category, description, priceTTC, novelty, color})
                     .then(creating=>{
+                        const size = req.body.size;
+                        const stock = req.body.stock;
+                        const productId = creating.dataValues.id;
+                        Stock.create({stock, size, productId})
                         res.status(200).send({message: "L'article vient d'être ajouté avec succès."})
                     })
                 }
@@ -49,7 +57,7 @@ exports.findAll = (req, res)=>{
 exports.findOne = (req, res)=>{
     try{
         const id = req.params.id;
-        Product.findOne({where: {id: id}})
+        Product.findOne({raw:true, where: {id: id}})
         .then(product=>{
             res.status(200).json({product: product})
         })
@@ -76,7 +84,7 @@ exports.update = (req, res)=>{
         res.status(400).send({message: "Erreur : "+e})
     }
 }
-
+ 
 exports.delete = (req, res)=>{
     try{
         const id = req.params.id;

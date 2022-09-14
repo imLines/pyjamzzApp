@@ -3,16 +3,20 @@ const {DataTypes} = require('sequelize');
 
 const Customer = sequelize.define("customer", {
     lastName: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     firstName: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     dateOfBirth: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        allowNull: true
     },
     sex: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     adress: { 
         type: DataTypes.STRING
@@ -26,17 +30,20 @@ const Customer = sequelize.define("customer", {
     postalAdress: {
         type: DataTypes.INTEGER
     },
-    email: {
+    state: {
         type: DataTypes.STRING
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
     },
     phone: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING
     },
     password: {
-        type: DataTypes.STRING
-    },
-    role: {
-        type: DataTypes.STRING
+        type: DataTypes.TEXT,
+        allowNull: false
     }
 });
 

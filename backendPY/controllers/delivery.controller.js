@@ -4,9 +4,8 @@ exports.create = (req, res)=>{
     try{
         const deliveryPrice = req.body.deliveryPrice;
         const company = req.body.company;
-        const minimumOrder = req.body.minimumOrder;
 
-        Delivery.create({deliveryPrice, company, minimumOrder})
+        Delivery.create({deliveryPrice, company})
         .then(()=>{
             res.status(200).send({message: "Delivery was created"});
         })
@@ -44,16 +43,15 @@ exports.update = (req, res)=>{
         const id = req.params.id;
         const deliveryPrice = req.body.deliveryPrice;
         const company = req.body.company;
-        const minimumOrder = req.body.minimumOrder;
 
-        Delivery.update({deliveryPrice, company, minimumOrder}, {where: {id: id}})
+        Delivery.update({deliveryPrice, company}, {where: {id: id}})
         .then(()=>{
             res.status(200).send({message: "Delivery is uptaded."})
         })
     }catch(e){
         res.status(400).send({message: "Error :"+e})
     }
-};
+}; 
 
 exports.delete = (req, res)=>{
     try{
@@ -66,4 +64,4 @@ exports.delete = (req, res)=>{
     }catch(e){
         res.status(400)/send({message: "Error : "+e});
     }
-}
+} 

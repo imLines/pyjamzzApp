@@ -3,13 +3,12 @@ const {DataTypes} = require('sequelize');
 
 const Delivery = sequelize.define('delivery', {
     deliveryPrice: {
-        type: DataTypes.FLOAT(10,2)
+        type: DataTypes.FLOAT(10,2),
+        allowNull: false
     },
     company: {
-        type: DataTypes.STRING
-    },
-    minimumOrder:{
-        type: DataTypes.FLOAT(10,2)
+        type: DataTypes.STRING,
+        allowNull: false
     }
 })
 

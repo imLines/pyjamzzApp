@@ -1,12 +1,3 @@
-exports.create = (req, res)=>{
-    //FOR THE PAYMENT
-    //NEED :
-    //_userId (byToken) => REACT
-    //_Total price ShoppingCard (Save in Local Storage) + The delivery => REACT
+exports.create = async (req, res)=>{
     
-    
-    //FOR THE ORDER 
-    //NEED :
-    //_all informations by the PAYMENT
-    //_
-}
+};

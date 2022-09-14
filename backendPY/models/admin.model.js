@@ -3,10 +3,13 @@ const {DataTypes} = require('sequelize');
 
 const Admin = sequelize.define('admin', {
     email: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
     },
     password: {
-        type: DataTypes.TEXT
+        type: DataTypes.TEXT,
+        allowNull: false
     },
     additionnalPassword: {
         type: DataTypes.TEXT

@@ -4,7 +4,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || "8000";
 
+ 
 
+require('dotenv').config()
 app.use(bodyParser.json());
 
 app.get('/', (req, res)=>{
@@ -18,7 +20,6 @@ app.listen(port, ()=>{
 
 //Models
 require('./models/customer.model');
-require('./models/shoppingCard.model');
 require('./models/payment.model');
 require('./models/order.model');
 require('./models/product.model');
@@ -26,15 +27,18 @@ require('./models/stock.model');
 require('./models/delivery.model');
 require('./models/relations.model');
 require('./models/wishList.model');
-require('./models/imagesProduct.model');
 require('./models/orderDetails.model');
 require('./models/wishList.model');
 require('./models/admin.model');
 
 //Routes
 require('./routes/customer.routes')(app);
-require('./routes/product.routes')(app);
+require('./routes/productAndStock.routes')(app);
 require('./routes/delivery.routes')(app);
+require('./routes/purchase.routes')(app);
+require('./routes/admin.routes')(app);
+require('./routes/security.routes')(app);
+require('./routes/wishList.routes')(app);
 
 const {sequelize} = require('./models/model');
 sequelize.sync({force: false, alter: false})

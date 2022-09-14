@@ -1,24 +1,43 @@
 const Customer = require('./customer.model');
-const ShoppingCard = require('./shoppingCard.model');
 const Payment = require('./payment.model');
 const Order = require('./payment.model');
 const Delivery = require('./delivery.model');
 const Product = require('./product.model');
 const Stock = require('./stock.model');
 const WishList = require('./wishList.model');
-const ImagesProduct = require('./imagesProduct.model');
+const OrderDetails = require('./orderDetails.model');
 
-Customer.hasOne(ShoppingCard);
-Payment.hasOne(Customer);
+//Customer
+Customer.hasOne(WishList);
+WishList.belongsTo(Customer);
+
+Customer.hasMany(Payment);
+Payment.belongsTo(Customer);
+
 Customer.hasMany(Order);
-Payment.hasOne(Order);
+Order.belongsTo(Customer);
+
+
+//Order
+Delivery.hasMany(Order);
+Order.belongsTo(Delivery);
+
+Order.hasOne(Payment);
 Payment.belongsTo(Order);
-Delivery.hasMany(Order); 
-Order.hasMany(Product);
+
+Order.hasMany(OrderDetails);
+OrderDetails.belongsTo(Order);
+
+
+//OrderDetails
+Product.hasMany(OrderDetails);
+OrderDetails.belongsTo(Product);
+
+//WishList
+Product.hasMany(WishList);
+WishList.belongsTo(Product);
+
+
+//Product
 Product.hasMany(Stock);
-Customer.hasMany(WishList);
-WishList.hasOne(Product);
-
-Product.hasMany(ImagesProduct);
-
-
+Stock.belongsTo(Product);

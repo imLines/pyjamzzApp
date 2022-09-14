@@ -3,7 +3,8 @@ const {DataTypes} = require('sequelize');
 
 const Payment = sequelize.define("payment", {
     amount: {
-        type: DataTypes.DECIMAL
+        type: DataTypes.DECIMAL,
+        allowNull: false
     }
     //THE ORDER ID CAN BE NULL FOR INITIALIZATION BEFORE 
 });
