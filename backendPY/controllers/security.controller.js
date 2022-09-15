@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 exports.registration = async (req, res) => {
     if(!req.body.sex || !req.body.lastName || !req.body.firstName  || !req.body.email || !req.body.password){
-        res.status(400).send({message: "Forbidden Informations."})
+        res.status(400).send({message: "Forgot data."})
     }else{
         const sex = req.body.sex;
         const lastName = req.body.lastName;
@@ -21,10 +21,10 @@ exports.registration = async (req, res) => {
                     .then(hashedPassword=>{
                         const password = hashedPassword;
                         Customer.create({sex, lastName, firstName,  email, password})
-                        res.status(201).send({message: "Votre compte à bien été créé."});
+                        res.status(201).send({message: "Your account has been successfully created."});
                     })
             }else{
-                res.status(400).send({message: "Adresse mail déjà utilisée"})
+                res.status(400).send({message: "This email was already used. Please reset your password or choose another email."})
             }
         })
     }
@@ -64,19 +64,18 @@ exports.login = (req, res)=>{
                                 const token = jwt.sign({customerId: id}, process.env.SECRET_KEY_TOKEN_CUSTOMER);
                                 res.status(200).json({token: token,  lastName, firstName, sex, adress, adressComplement, country, postalAdress, state, email, phone});
                             }else{
-                                res.status(400).send({message: " no ok"})
+                                res.status(400).send({message: "Incorrect password."})
                             }
                         })
                         
                     }else{
-                        res.status(400).send({message: "Aucun utilisateur avec cet email trouvé"});
+                        res.status(400).send({message: "None customer was found with this mail adress."});
                     }
                 })
             }
         })  
     }catch(e){
-        console.log("ERROR IS : "+e);
-        res.status(500).send({message: "Error..."})
+        res.status(400).send({message: "Error :"+e})
     };
 };
 
@@ -84,7 +83,7 @@ exports.login = (req, res)=>{
 exports.changePassword = (req, res)=>{
     try{
         if(!req.body.newPassword){
-            res.status(400).send({message: "informations manquantes"})
+            res.status(400).send({message: "Forgot data."})
         }else{
             const token =  req.get('Authorization');
             const tokenDecrypt = jwt.verify(token, process.env.SECRET_KEY_TOKEN_CUSTOMER);
@@ -94,7 +93,7 @@ exports.changePassword = (req, res)=>{
                 bcrypt.hash(newpassword, 10)
                 .then(newPasswordHashed=>{
                     Customer.update({password: newPasswordHashed},{ where:{id: tokenDecrypt.customerId}})
-                    res.status(200).send({message: "Success Password Changed."})
+                    res.status(200).send({message: "Password changed successfully."})
                 })
             })
         }

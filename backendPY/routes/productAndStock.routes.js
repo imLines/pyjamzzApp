@@ -4,7 +4,7 @@ module.exports = app =>{
     const product = require('../controllers/productAndStock.controller');
 
     router.post('/new', product.create);
-    router.delete('/:id', product.delete);
+    router.delete('/delete/:id', product.delete);
     router.get('/:category', product.findAll);
     router.post('/:category/:id', product.update);
     router.get('/:category/:id', product.findOne);

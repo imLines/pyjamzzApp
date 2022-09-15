@@ -3,10 +3,8 @@ const Stock = require('../models/stock.model')
 
 exports.create = async (req, res)=>{
     if(!req.body.name || !req.body.environment || !req.body.category || !req.body.description || !req.body.priceTTC || !req.body.stock || !req.body.size || req.body.novelty == null || !req.body.color){
-        console.log('Donnée manquante...');
-        res.status(400).send({message: "Donnée manquante..."});
+        res.status(400).send({message: "Forgot data."});
     }else {
-        //For the Product
         const name = req.body.name;
         const environment = req.body.environment;
         const category = req.body.category;
@@ -14,14 +12,11 @@ exports.create = async (req, res)=>{
         const priceTTC = req.body.priceTTC;
         const novelty = req.body.novelty; 
         const color = req.body.color;
-        //For the Stock
-        
- 
         try{
             Product.findOne({raw: true, where: {name: name}})
             .then(data=>{
                 if(data){
-                    res.status(400).send({message: "Il existe un article portant ce nom..."});
+                    res.status(400).send({message: "There is an product with this name."});
                 }else{
                     Product.create({name, environment, category, description, priceTTC, novelty, color})
                     .then(creating=>{
@@ -29,14 +24,12 @@ exports.create = async (req, res)=>{
                         const stock = req.body.stock;
                         const productId = creating.dataValues.id;
                         Stock.create({stock, size, productId})
-                        res.status(200).send({message: "L'article vient d'être ajouté avec succès."})
+                        res.status(200).send({message: "The product has just been successfully added."})
                     })
                 }
             })
-            console.log('Formulaire valide.');
-            res.status(200);
         }catch(e){
-            console.log(e)
+            res.status(400).send({message: "Error :"+e})
         }
     }
 } 
@@ -49,7 +42,7 @@ exports.findAll = (req, res)=>{
             res.status(200).json({products: products})
         })
     }catch(e){
-        console.log("ERREUR"+e)
+        console.log("Error :"+e)
         res.status(400)
     }
 } 
@@ -62,7 +55,7 @@ exports.findOne = (req, res)=>{
             res.status(200).json({product: product})
         })
     }catch(e){
-        res.status(400).send({message: "Erreur : "+e})
+        res.status(400).send({message: "Error : "+e})
     }
 }
 
@@ -78,10 +71,10 @@ exports.update = (req, res)=>{
         const id = req.params.id;
         Product.update({name, environment, category, description, priceTTC, novelty, color}, {where: {id: id}})
         .then(product=>{
-            res.status(200).json({product})
+            res.status(200).send({message: "Product was updated."})
         })
     }catch(e){
-        res.status(400).send({message: "Erreur : "+e})
+        res.status(400).send({message: "Error : "+e})
     }
 }
  
@@ -90,7 +83,7 @@ exports.delete = (req, res)=>{
         const id = req.params.id;
         Product.destroy({where:{id: id}})
         .then(()=>{
-            res.status(200).send({message: "It's delete."})
+            res.status(200).send({message: "Product was deleted."})
         })
     }catch(e){
         res.status(400).send({message: "Erreur : "+e})

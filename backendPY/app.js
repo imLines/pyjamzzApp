@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+
+
+
 const path = require('path');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || "8000";
@@ -9,9 +12,7 @@ const port = process.env.PORT || "8000";
 require('dotenv').config()
 app.use(bodyParser.json());
 
-app.get('/', (req, res)=>{
-    res.status(200).send("Initialize");
-});
+
 
 app.listen(port, ()=>{
     console.log(`Listening to requests on http://localhost:${port}`)
@@ -47,4 +48,4 @@ sequelize.sync({force: false, alter: false})
 })
 .catch((err)=>{
     console.log("Failed to sync with DB: "+err);
-});
+}); 

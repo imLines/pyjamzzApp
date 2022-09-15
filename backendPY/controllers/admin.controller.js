@@ -5,23 +5,23 @@ exports.create = (req, res)=>{
 
     try{
         if(!req.body.email || !req.body.password || !req.body.secureAK){
-            res.status(400).send({message: "Invalid or forbidden information"})
+            res.status(400).send({message: "Invalid or forgotten information."})
         }else{
             const email = req.body.email;
             const noHashPassword = req.body.password;
             const secureAKenterByAdmin = req.body.secureAK;
             if(secureAKenterByAdmin != process.env.SECURE_ADMIN_KEY){
-                res.status(401).send({message: "Error in Form."})
+                res.status(401).send({message: "Error in the form."})
             }else{
                 bcrypt.hash(noHashPassword, 10)
                 .then(password=>{
                     Admin.findOne({raw: true, where:{email: email}})
                     .then(data=>{
                         if(data){
-                            res.status(400).send({message: "admin already exist"})
+                            res.status(400).send({message: "This admin already exist."})
                         }else{
                             Admin.create({email, password})
-                            res.status(200).send({message: "Admin was created."})
+                            res.status(201).send({message: "Admin was created."})
     
                         }
                     })
@@ -68,7 +68,7 @@ exports.update = (req, res)=>{
         const id = req.params.id;
         const secureAKenterByAdmin = req.body.secureAK;
         if(secureAKenterByAdmin != process.env.SECURE_ADMIN_KEY){
-            res.status(401).send({message: "Error in Form."})
+            res.status(400).send({message: "Error in the form."})
         }else{
             Admin.findOne({raw: true, where: {id: id}})
             .then(admin=>{
@@ -99,7 +99,7 @@ exports.delete = (req, res)=>{
         }else{
             const id = req.params.id;
             Admin.destroy({where: {id: id}})
-            res.status(200).send({message: "Admin is destroy."})
+            res.status(200).send({message: "this Admin was destroy."})
         }
     }catch(e){
         res.status(400).send({message: "Error: "+e})

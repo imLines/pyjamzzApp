@@ -42,7 +42,7 @@ const Customer = sequelize.define("customer", {
         type: DataTypes.STRING
     },
     password: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false
     }
 });

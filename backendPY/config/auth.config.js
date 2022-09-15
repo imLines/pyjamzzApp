@@ -3,12 +3,17 @@ const jwt = require('jsonwebtoken');
 function decryptAccessToken(req, res, next){
     try{
         const token =  req.get('Authorization')
-        const decodedToken = jwt.verify(token, process.env.SECRET_KEY_TOKEN_CUSTOMER)
-        console.log(decodedToken);
-        if(decodedToken){
+        const decodedTokenCustomer = jwt.verify(token, process.env.SECRET_KEY_TOKEN_CUSTOMER )
+        const decodedTokenAdmin = jwt.verify(token, process.env.SECRET_KEY_TOKEN_ADMIN)
+        
+        if(decodedTokenCustomer){
             next();
         }else{
-            res.status(401).send({message: "You need to be login for continue"});
+            if(decodedTokenAdmin){
+                next();
+            }else{
+                res.status(401).send({message: "You need to be login for continue"});
+            }
         }
         
     }catch(e){

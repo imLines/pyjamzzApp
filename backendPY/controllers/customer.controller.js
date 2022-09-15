@@ -24,7 +24,7 @@ exports.create = (req, res)=>{
                 res.status(400).send({message: "This email was already used. Please reset your password or choose another email."})
             }else{
                 Customer.create({lastName, firstName, dateOfBirth, sex, adress, adressComplement, country, postalAdress, email, phone, password})
-                res.status(200).send({message: "Customer was created."});
+                res.status(201).send({message: "Customer was created."});
             };
         })
     }catch(e){
@@ -52,8 +52,8 @@ exports.findAll = (req, res)=>{
 
     try{
         Customer.findAll()
-        .then(exist=>{
-            res.status(200).json({exist});
+        .then(customers=>{
+            res.status(200).json({customers});
         })
     }catch(e){
         res.status(400).send({message: "Erreur: "+e})
@@ -63,7 +63,7 @@ exports.findAll = (req, res)=>{
 exports.update = (req, res)=>{
     try{
         if(!req.body.lastName || !req.body.firstName || !req.body.sex || !req.body.email ){
-            res.status(400).send({message: "Forbidden info"});
+            res.status(400).send({message: "Forgot info"});
         }else{
             const id = req.params.id;
     
@@ -85,9 +85,9 @@ exports.update = (req, res)=>{
                     .then(valid=>{ 
                         if(valid){
                             Customer.update({lastName, firstName, dateOfBirth, sex, adress, adressComplement, country, postalAdress, email, phone}, {where: {id: id}})
-                            res.status(200).send({message: "Customer was updated."});
+                            res.status(201).send({message: "Customer was updated."});
                         }else{
-                            res.status(400).send({message: "password incorrect...."})
+                            res.status(400).send({message: "Incorrect password."})
                         }
                     })
                 }else{
@@ -106,7 +106,7 @@ exports.delete = (req, res)=>{
         const id = req.params.id;
         Customer.destroy({where:{id: id}})
         .then(()=>{
-            res.status(200).send({message: "Customer is delete."})
+            res.status(200).send({message: "Customer was deleted."})
         })
     }catch(e){
         res.status(400).send({message: "Erreur : "+e})
