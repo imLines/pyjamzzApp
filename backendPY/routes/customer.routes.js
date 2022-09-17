@@ -9,7 +9,7 @@ module.exports = app => {
     router.get('/all', protected,customer.findAll);
     router.post('/update/:id', auth,customer.update);
     router.delete('/ban/:id', protected, customer.delete);
-    router.get('/:id', auth,customer.findOne); 
+    router.get('/:id', auth, customer.findOne); 
 
-    app.use('/customer', router)
-};  
+    app.use('/customer', router);
+};     

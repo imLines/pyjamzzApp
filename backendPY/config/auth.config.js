@@ -3,8 +3,7 @@ const jwt = require('jsonwebtoken');
 function decryptAccessToken(req, res, next){
     try{
         const token =  req.get('Authorization')
-        const decodedTokenCustomer = jwt.verify(token, process.env.SECRET_KEY_TOKEN_CUSTOMER )
-        const decodedTokenAdmin = jwt.verify(token, process.env.SECRET_KEY_TOKEN_ADMIN)
+        const decodedTokenCustomer = jwt.verify(token, process.env.SECRET_KEY_TOKEN_CUSTOMER)
         
         if(decodedTokenCustomer){
             next();
@@ -21,4 +20,4 @@ function decryptAccessToken(req, res, next){
     }
 };
 
-module.exports = decryptAccessToken; 
+module.exports = decryptAccessToken;  

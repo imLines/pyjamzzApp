@@ -36,44 +36,37 @@ exports.login = (req, res)=>{
         const email = req.body.email;
         const password = req.body.password;
 
-        Admin.findOne({raw: true, where:{email: email}})
-        .then(admin => {
-            if(admin){
-                const adminId = admin.id;
-                const adminToken = jwt.sign({token: adminId}, process.env.SECRET_KEY_TOKEN_ADMIN, {expiresIn: "1h"});
-                res.status(200).json({token: adminToken}); 
-            }else{
-                Customer.findOne({raw: true, where: {email: email}})
-                .then(customer=> {
-                    if(customer){
-                        const customerPassword = customer.password;
-                        bcrypt.compare(password, customerPassword)
-                        .then(validate => {
-                            if(validate){
-                                const id = customer.id; 
-                                const lastName = customer.lastName;
-                                const firstName = customer.firstName;
-                                const sex = customer.sex;
-                                const adress = customer.adress;
-                                const adressComplement = customer.adressComplement;
-                                const country = customer.country;
-                                const postalAdress = customer.postalAdress;
-                                const state = customer.state;
-                                const email = customer.email;
-                                const phone = customer.phone;
-                                const token = jwt.sign({customerId: id}, process.env.SECRET_KEY_TOKEN_CUSTOMER);
-                                res.status(200).json({token: token,  lastName, firstName, sex, adress, adressComplement, country, postalAdress, state, email, phone});
-                            }else{
-                                res.status(400).send({message: "Incorrect password."})
-                            }
-                        })
-                        
+        Customer.findOne({raw: true, where: {email: email}})
+        .then(customer=> {
+            if(customer){
+                const customerPassword = customer.password;
+                bcrypt.compare(password, customerPassword)
+                .then(validate => {
+                    if(validate){
+                        const id = customer.id; 
+                        const lastName = customer.lastName;
+                        const firstName = customer.firstName;
+                        const sex = customer.sex;
+                        const adress = customer.adress;
+                        const adressComplement = customer.adressComplement;
+                        const country = customer.country;
+                        const postalAdress = customer.postalAdress;
+                        const state = customer.state;
+                        const email = customer.email;
+                        const phone = customer.phone;
+                        const token = jwt.sign({customerId: id}, process.env.SECRET_KEY_TOKEN_CUSTOMER);
+                        res.status(200).json({token: token,  lastName, firstName, sex, adress, adressComplement, country, postalAdress, state, email, phone});
                     }else{
-                        res.status(400).send({message: "None customer was found with this mail adress."});
+                        res.status(400).send({message: "Incorrect password."})
                     }
                 })
+                
+            }else{
+                res.status(400).send({message: "None customer was found with this mail adress."});
             }
-        })  
+            })
+        
+         
     }catch(e){
         res.status(400).send({message: "Error :"+e})
     };

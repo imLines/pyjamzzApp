@@ -5,11 +5,11 @@ module.exports = app => {
     const auth = require('../config/auth.config');
     
 
-    router.get('/all', wishList.findAll);
+    router.get('/all', auth, wishList.findAll);
 
-    router.post('/add/:id',  wishList.create);
+    router.post('/add/:id',  auth,wishList.create);
 
-    router.delete('/delete/:id', wishList.delete);
+    router.delete('/delete/:id', auth,wishList.delete);
 
     app.use('/wishlist', router)
  
