@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
-
+const cors = require('cors');
 
 
 const path = require('path');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || "8000";
+app.use(cors())
+
 
  
 
@@ -18,7 +20,7 @@ app.listen(port, ()=>{
     console.log(`Listening to requests on http://localhost:${port}`)
 });
 
-
+  
 //Models
 require('./models/customer.model');
 require('./models/payment.model');

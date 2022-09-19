@@ -33,6 +33,7 @@ exports.registration = async (req, res) => {
 
 exports.login = (req, res)=>{
     try{
+
         const email = req.body.email;
         const password = req.body.password;
 
@@ -55,14 +56,14 @@ exports.login = (req, res)=>{
                         const email = customer.email;
                         const phone = customer.phone;
                         const token = jwt.sign({customerId: id}, process.env.SECRET_KEY_TOKEN_CUSTOMER);
-                        res.status(200).json({token: token,  lastName, firstName, sex, adress, adressComplement, country, postalAdress, state, email, phone});
+                        res.status(200).json({token: token, customer:{lastName, firstName, sex, adress, adressComplement, country, postalAdress, state, email, phone} });
                     }else{
                         res.status(400).send({message: "Incorrect password."})
                     }
                 })
                 
             }else{
-                res.status(400).send({message: "None customer was found with this mail adress."});
+                res.status(400).send({message: "Une erreur s'est produite"});
             }
             })
         

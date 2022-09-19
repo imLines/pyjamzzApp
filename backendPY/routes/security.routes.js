@@ -8,4 +8,4 @@ module.exports = app => {
     router.post('/login', security.login);
     router.post('/changepassword', auth, security.changePassword)
     app.use('/log', router)
-}; 
+};  

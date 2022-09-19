@@ -1,0 +1,50 @@
+
+.registration-container{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+form{
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.form-row{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+.form-row label{
+    margin-right: 10px;
+}
+
+.registration-container h2{
+    font-weight: 500;
+    font-size: 20px;
+    background-color: #D8D7D9;
+    padding: 7px 30px;
+    border-radius: 25px;
+}
+
+.form-section{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.form-section input{
+    width: 200px;
+    height: 20px;
+}
+
+form p{
+    font-size: 10px;
+}

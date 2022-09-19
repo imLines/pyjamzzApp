@@ -15,8 +15,8 @@ module.exports = app => {
     router.get('/admin/:id',  protected,admin.findOne);
  
     //routes for manage customer
-    router.post('/customer/update/:id', admin.updateCustomer);
-    router.get('/customer/:id', admin.findOneCustomer);
+    router.post('/customer/update/:id', protected,admin.updateCustomer);
+    router.get('/customer/:id', protected,admin.findOneCustomer);
 
     
 

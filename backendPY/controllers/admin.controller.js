@@ -145,13 +145,14 @@ exports.delete = (req, res)=>{
 exports.updateCustomer = (req, res)=>{
     try{
         if(!req.body.lastName || !req.body.firstName || !req.body.sex || !req.body.email ){
-            const customerId = req.get('Authorization');
-            Customer.findOne({raw: true, where: {id: customerId}})
+            res.status(400).send({message: "Veuillez remplir les champs obligatoires"})    
+        }else{
+            const id = req.params.id;
+            Customer.findOne({raw: true, where: {id: id}})
             .then(customer=>{
                 if(customer){
                     const lastName = req.body.lastName;
                     const firstName = req.body.firstName;
-                    const dateOfBirth = req.body.dateOfBirth;
                     const sex = req.body.sex;
                     const adress = req.body.adress; 
                     const adressComplement = req.body.adressComplement;
@@ -159,14 +160,13 @@ exports.updateCustomer = (req, res)=>{
                     const postalAdress = req.body.postalAdress;
                     const email = req.body.email;
                     const phone = req.body.phone;
-                    Customer.update({lastName, firstName, dateOfBirth, sex, adress, adressComplement, country, postalAdress, email, phone}, {where: {id: id}})
+                    Customer.update({lastName, firstName, sex, adress, adressComplement, country, postalAdress, email, phone}, {where: {id: id}})
                     res.status(201).send({message: "Utilisateur mis à jour."})
                 }else{
+                    console.log(customer)
                     res.status(404).send({message: "Aucun utilisateur trouvé."})
                 }
             })
-        }else{
-            res.status(400).send({message: "Veuillez remplir les champs invalides"})
         }
     }catch(e){
         res.status(400).send({message: "Erreur :"+e})
@@ -187,4 +187,4 @@ exports.findOneCustomer = (req, res)=>{
     }catch(e){
         res.status(400).send({message: "Erreur : "+e})
     }
-}
+} 
