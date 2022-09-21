@@ -24,8 +24,8 @@ function Banner(){
             <button className={hamburger} onClick={changeNav}></button>
             <ul className={navLink}>
                 <li><Link to="/about">A propos</Link></li>
-                <li><Link >Nouveauté</Link></li>
-                <li>Nos produits</li>
+                <li><Link to="/news">Nouveauté</Link></li>
+                <li><Link to="/products">Nos produits</Link></li>
                 <li>Aide</li>
             </ul>
         </div>

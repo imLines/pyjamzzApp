@@ -46,7 +46,7 @@ exports.login = (req, res)=>{
                     if(validate){
                         const id = customer.id; 
                         const lastName = customer.lastName;
-                        const firstName = customer.firstName;
+                        const firstName = customer.firstName; 
                         const sex = customer.sex;
                         const adress = customer.adress;
                         const adressComplement = customer.adressComplement;
@@ -54,8 +54,8 @@ exports.login = (req, res)=>{
                         const postalAdress = customer.postalAdress;
                         const state = customer.state;
                         const email = customer.email;
-                        const phone = customer.phone;
-                        const token = jwt.sign({customerId: id}, process.env.SECRET_KEY_TOKEN_CUSTOMER);
+                        const phone = customer.phone; 
+                        const token = jwt.sign({customerId: id}, process.env.SECRET_KEY_TOKEN_CUSTOMER, {expiresIn: "2h"});
                         res.status(200).json({token: token, customer:{lastName, firstName, sex, adress, adressComplement, country, postalAdress, state, email, phone} });
                     }else{
                         res.status(400).send({message: "Incorrect password."})
@@ -65,7 +65,7 @@ exports.login = (req, res)=>{
             }else{
                 res.status(400).send({message: "Une erreur s'est produite"});
             }
-            })
+            }) 
         
          
     }catch(e){

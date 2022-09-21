@@ -50,4 +50,4 @@ sequelize.sync({force: false, alter: false})
 })
 .catch((err)=>{
     console.log("Failed to sync with DB: "+err);
-}); 
+});  

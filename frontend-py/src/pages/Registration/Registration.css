@@ -15,6 +15,10 @@ form{
     margin-top: 20px;
 }
 
+.form label{
+    margin-top: 10px;
+}
+
 .form-row{
     display: flex;
     flex-flow: row;
@@ -47,4 +51,14 @@ form{
 
 form p{
     font-size: 10px;
+}
+
+.button-form{
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: #D8D7D9;
+    padding: 7px 30px;
+    border-radius: 25px;
+    border: 2px solid black;
 }

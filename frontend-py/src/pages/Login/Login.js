@@ -1,15 +1,15 @@
 import './Login.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 
 function Login(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     const login = async function(event){
         event.preventDefault()
-        console.log(email);
-        console.log(password);
         try{
             const requestOptions = {
                 method: 'POST',
@@ -18,11 +18,9 @@ function Login(){
             };
             const data = await fetch('http://localhost:8000/log/login', requestOptions);
             const element = await data.json();
-            localStorage.setItem('token', element.token)
-            localStorage.setItem('customer', element.customer)
-            
-
-            
+            localStorage.setItem('token', element.token);
+            localStorage.setItem('customer', JSON.stringify(element.customer));
+            navigate('/login/success');
         }catch(e){
             console.log(e)
         }
