@@ -1,0 +1,11 @@
+section{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.card-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}

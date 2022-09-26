@@ -4,11 +4,11 @@ module.exports = app =>{
     const product = require('../controllers/productAndStock.controller');
     const protected = require('../config/protected.config');
 
-    router.post('/new', protected,product.create);
+    router.get('/:id', product.findOne);
+    router.post('/:id', protected,product.update);
+    router.get('/list/:category', product.findAll);
     router.delete('/delete/:id', protected,product.delete);
-    router.get('/:category', product.findAll);
-    router.post('/:category/:id', protected,product.update);
-    router.get('/:category/:id', product.findOne);
+    router.post('/new', protected, product.create); //Rajouter le protected !!!!!
 
     app.use('/product', router);
 }  

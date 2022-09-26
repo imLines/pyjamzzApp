@@ -52,7 +52,11 @@ exports.findOne = (req, res)=>{
         const id = req.params.id;
         Product.findOne({raw:true, where: {id: id}})
         .then(product=>{
-            res.status(200).json({product: product})
+            if(product){
+                res.status(200).json({product: product})
+            }else{
+                res.status(400).send({message: "Aucun article trouvé. désolé."})
+            }
         })
     }catch(e){
         res.status(400).send({message: "Error : "+e})
