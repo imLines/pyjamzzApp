@@ -1,0 +1,42 @@
+.big-container{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.one-category-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 150px;
+    background-color: blue;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.one-link{
+    background-color: white;
+    padding: 20px;
+}
+
+.many-category-card{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    background-color: blue;
+    width: 300px;
+    height: 150px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.many-link{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 5px;
+    background-color: white;
+
+}

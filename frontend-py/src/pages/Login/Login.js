@@ -21,29 +21,32 @@ function Login(){
             localStorage.setItem('token', element.token);
             localStorage.setItem('customer', JSON.stringify(element.customer));
             navigate('/login/success');
+            window.location.reload()
         }catch(e){
             console.log(e)
         }
     }
 
     return(
-        <div className='login-container'>
-            <h2>Connexion</h2>
-            <form  onSubmit={login}>
-                <div className='form-section'>
-                    <label htmlFor="email"> Email </label>
-                    <input type="text" name="email" required onChange={event=>setEmail(event.target.value)}/>
-                </div>
-                <div className='form-section'>
-                    <label htmlFor="password"> Mot de passe </label>
-                    <input type="password" name="password" required onChange={event=>setPassword(event.target.value)}/>
-                    <p>Mot de passe oublié ?</p>
-                </div>
-                <button type='submit' className='button-form'>Me connecter</button>
-            </form>
-            <Link to="/registration">M'inscrire</Link>
-            
-        </div>
+        <>
+            <div className='login-container'>
+                <h2>Connexion</h2>
+                <form  onSubmit={login}>
+                    <div className='form-section'>
+                        <label htmlFor="email"> Email </label>
+                        <input type="text" name="email" required onChange={event=>setEmail(event.target.value)}/>
+                    </div>
+                    <div className='form-section'>
+                        <label htmlFor="password"> Mot de passe </label>
+                        <input type="password" name="password" required onChange={event=>setPassword(event.target.value)}/>
+                        <p>Mot de passe oublié ?</p>
+                    </div>
+                    <button type='submit' className='button-form'>Me connecter</button>
+                </form>
+                <Link to="/registration">M'inscrire</Link>
+                
+            </div>
+        </>
     )
 };
 

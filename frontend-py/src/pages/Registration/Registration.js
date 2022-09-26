@@ -1,6 +1,6 @@
 import './Registration.css';
 import React, {useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Registration(){
     const [sex, setSex] = useState('');
@@ -105,9 +105,10 @@ function Registration(){
                         S’inscrire à la newsletter pour reçevoir des remises exclusives
                     </p>
                 </div>
-                <button type='submit' className='button-form'>Me connecter</button>
+                <button type='submit' className='button-form'>M'inscrire'</button>
         
             </form>
+            <Link to="/login">Me connecter</Link>
         </div>
     )
 }
