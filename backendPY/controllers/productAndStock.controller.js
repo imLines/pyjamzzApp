@@ -53,7 +53,10 @@ exports.findOne = (req, res)=>{
         Product.findOne({raw:true, where: {id: id}})
         .then(product=>{
             if(product){
-                res.status(200).json({product: product})
+                Stock.findAll({raw: true, where:{productId: id}})
+                .then(stock=>{
+                    res.status(200).json({product: product, stock: stock})
+                })
             }else{
                 res.status(400).send({message: "Aucun article trouvé. désolé."})
             }
@@ -91,5 +94,36 @@ exports.delete = (req, res)=>{
         })
     }catch(e){
         res.status(400).send({message: "Erreur : "+e})
+    }
+}
+
+exports.updateStock= (req, res)=>{
+    try{
+        const productId = req.params.id;
+        const size = req.body.size;
+        const newStock = req.body.newStock
+        Stock.update({stock: newStock}, {where: {productId: productId, size: size}})
+        res.status(200).send({message: "Stock was successfull updated !"})
+    }catch(e){
+        res.status(400).send({message: "An error was detected :"+e})
+    }
+}
+
+exports.addStock = (req, res)=>{
+    try{
+        const productId = req.params.id;
+        const size = req.body.size;
+        const stock = req.body.stock;
+        Stock.findOne({raw: true, where: {productId: productId, size: size}})
+        .then(data=>{
+            if(data){
+                res.status(400).send({message: "Vous ne pouvez pas créer deux stock différents pour un même produit & une même taille. Veuillez le mettre simplement à jour."})
+            }else{
+                Stock.create({productId, size, stock})
+                res.status(200).send({message: "Le stock à bien été créé."})
+            }
+        })
+    }catch(e){
+        res.status(400).send({message: "Error :"+e})
     }
 }

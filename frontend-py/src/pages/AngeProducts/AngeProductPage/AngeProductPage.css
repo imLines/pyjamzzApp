@@ -9,13 +9,13 @@
     height: 250px;
     display: flex;
     flex-flow: column wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
 .miniatures-container img{
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     background-color: gray;
     
 }
@@ -56,4 +56,15 @@
 .price-container p{
     font-size: 25px;
     font-weight: 700;
+}
+
+.row-container{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: aqua;
 }
