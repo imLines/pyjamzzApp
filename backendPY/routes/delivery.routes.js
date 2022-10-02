@@ -6,7 +6,7 @@ module.exports = app =>{
 
     router.post('/create', protected,delivery.create);
     router.get('/all', delivery.findAll);
-    router.post('/update/:id', protected,delivery.update);
+    router.put('/update/:id', protected,delivery.update);
     router.delete('/delete/:id', protected,delivery.delete);
     router.get('/:id', delivery.findOne);
 

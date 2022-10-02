@@ -10,12 +10,12 @@ module.exports = app => {
     //routes for manage admin
     router.post('/admin/add',  admin.create);
     router.get('/admin/all',  protected,admin.findAll);
-    router.post('/admin/update/:id',  protected,admin.update);
+    router.put('/admin/update/:id',  protected,admin.update);
     router.delete('/admin/ban/:id',  protected,admin.delete);
     router.get('/admin/:id',  protected,admin.findOne);
  
     //routes for manage customer
-    router.post('/customer/update/:id', protected,admin.updateCustomer);
+    router.put('/customer/update/:id', protected,admin.updateCustomer);
     router.get('/customer/:id', protected,admin.findOneCustomer);
 
     

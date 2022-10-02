@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './pages/partials/Navbar/Navbar';
 import Banner from './pages/partials/Banner/Banner';
 import {SuccessRegistration, SuccessLogin} from './pages/Success/Success';
+import React from 'react';
 
 
 import Login from './pages/Login/Login';
@@ -33,6 +34,10 @@ import AccessoriesProducts from './pages/AccessoriesProducts/AccessoriesProducts
 import AngeProductPage from './pages/AngeProducts/AngeProductPage/AngeProductPage';
 
 function App() {
+  
+
+
+
   return ( 
     <div className='app'>
         <Navbar/>

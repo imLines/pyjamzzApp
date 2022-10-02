@@ -6,7 +6,7 @@ module.exports = app =>{
 
     router.get('/:id', productAndStock.findOne);
     router.post('/:id', protected,productAndStock.update);
-    router.post('/stock/:id', productAndStock.updateStock);
+    router.put('/stock/:id', productAndStock.updateStock);
     router.post('/stock/add/:id', productAndStock.addStock);
     router.get('/list/:category', productAndStock.findAll);
     router.delete('/delete/:id', protected,productAndStock.delete);

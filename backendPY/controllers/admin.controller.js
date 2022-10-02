@@ -90,7 +90,7 @@ exports.findAll = (req, res)=>{
         if(admins){
             res.status(200).json({admins})
         }else{
-            res.status(404).send({message: "Aucun admin à été trouvé."})
+            res.status(404).send({message: "Aucun admin n'a été trouvé."})
         }
     })
 };

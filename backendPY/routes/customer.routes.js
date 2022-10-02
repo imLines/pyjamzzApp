@@ -7,7 +7,7 @@ module.exports = app => {
 
     router.post('/create', protected,customer.create);
     router.get('/all', protected,customer.findAll);
-    router.post('/update/:id', auth,customer.update);
+    router.put('/update/:id', auth,customer.update);
     router.delete('/ban/:id', protected, customer.delete);
     router.get('/:id', auth, customer.findOne); 
 

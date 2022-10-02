@@ -21,7 +21,7 @@ exports.create = (req, res)=>{
         Customer.findOne({where: {email: email}})
         .then(response=>{
             if(response){
-                res.status(400).send({message: "This email was already used. Please reset your password or choose another email."})
+                res.status(400).send({message: "This email was already used. Please choose another email."})
             }else{
                 Customer.create({lastName, firstName, dateOfBirth, sex, adress, adressComplement, country, postalAdress, email, phone, password})
                 res.status(201).send({message: "Customer was created."});
