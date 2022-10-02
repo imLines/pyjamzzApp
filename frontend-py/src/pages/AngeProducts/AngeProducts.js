@@ -9,17 +9,17 @@ function AngeProducts(){
                 <h1>Menu of products (Exclu ange)</h1>
 
                 <div className='one-category-card'>
-                    <Link to="/products/ange/pyjamas" className='one-link'>Pyjamas Ange</Link>
+                    <Link to="/client/products/ange/pyjamas" className='one-link'>Pyjamas Ange</Link>
                 </div>
                 <div className='one-category-card'>
-                <Link to='/products/ange/nuisettes' className='one-link'>Nuisettes</Link>
+                <Link to='/client/products/ange/nuisettes' className='one-link'>Nuisettes</Link>
                 </div>
                 <div className='many-category-card'>
                     <div className='many-link'>
-                        <Link to='/products/ange/culottes'>Culottes</Link>
-                        <Link to='/products/ange/soutiens-gorge'>Soutiens-Gorge</Link>
-                        <Link to='/products/ange/brassiere'>Brassière</Link>
-                        <Link to='/products/ange/shorty'>Shorty</Link>
+                        <Link to='/client/products/ange/culottes'>Culottes</Link>
+                        <Link to='/client/products/ange/soutiens-gorge'>Soutiens-Gorge</Link>
+                        <Link to='/client/products/ange/brassiere'>Brassière</Link>
+                        <Link to='/client/products/ange/shorty'>Shorty</Link>
                     </div>
                 </div>
             </div>

@@ -49,7 +49,7 @@ function Registration(){
                     };
                     const data = await fetch('http://localhost:8000/log/registration', requestOptions);
                     const element = await data.json();
-                    navigate('/registration/success')
+                    navigate('/client/registration/success')
                 }
             }
         }catch(e){
@@ -108,7 +108,7 @@ function Registration(){
                 <button type='submit' className='button-form'>M'inscrire'</button>
         
             </form>
-            <Link to="/login">Me connecter</Link>
+            <Link to="/client/login">Me connecter</Link>
         </div>
     )
 }

@@ -1,16 +1,13 @@
-import {Routes, Route} from 'react-router-dom';
 import './App.css';
+import {Routes, Route} from 'react-router-dom'
+import Customer from './Customer';
 
-import Navbar from './pages/partials/Navbar/Navbar';
-import Banner from './pages/partials/Banner/Banner';
 import {SuccessRegistration, SuccessLogin} from './pages/Success/Success';
-import React from 'react';
-
 
 import Login from './pages/Login/Login';
 import ShoppingCard from './pages/ShoppingCard/ShoppingCard';
 import Home from './pages/Home';
-import Footer from './pages/partials/Footer/Footer';
+
 import About from './pages/About/About';
 import Registration from './pages/Registration/Registration';
 import Profil from './pages/Profil/Profil';
@@ -35,72 +32,59 @@ import AngeProductPage from './pages/AngeProducts/AngeProductPage/AngeProductPag
 
 function App() {
   
-
-
-
-  return ( 
-    <div className='app'>
-        <Navbar/>
-        <Banner/>
-
-      <Routes>
-        <Route exact path='/' element={<Home/>}/>
-        <Route exact path='/shoppingcard' element={<ShoppingCard/>}/>
-        <Route exact path='/login' element={<Login/>}/>
-        <Route exact path='/about' element={<About/>}/>
-        <Route exact path='/registration' element={<Registration/>}/>
+  return(
+    <Routes>
+      <Route exact path='/client' element={<Customer/>}>
+        <Route exact path='/client/home' element={<Home/>}/>
+        <Route exact path='/client/shoppingcard' element={<ShoppingCard/>}/>
+        <Route exact path='/client/login' element={<Login/>}/>
+        <Route exact path='/client/about' element={<About/>}/>
+        <Route exact path='/client/registration' element={<Registration/>}/>
         
-        <Route exact path='/profil' element={<Profil/>}>
-          <Route path='/profil/infos' element={<Infos/>}/>
-          <Route path='/profil/orders' element={<Orders/>}/>
-          <Route path='/profil/messages' element={<Messages/>}/>
-          <Route path='/profil/wishlist' element={<WishList/>}/>
+        <Route exact path='/client/profil' element={<Profil/>}>
+          <Route path='/client/profil/infos' element={<Infos/>}/>
+          <Route path='/client/profil/orders' element={<Orders/>}/>
+          <Route path='/client/profil/messages' element={<Messages/>}/>
+          <Route path='/client/profil/wishlist' element={<WishList/>}/>
         </Route>
 
-        <Route path='/products' element={<Products/>}/>
+        <Route path='/client/products' element={<Products/>}/>
 
 
-        <Route exact path='/products/ange' element={<AngeProducts/>}/>
+        <Route exact path='/client/products/ange' element={<AngeProducts/>}/>
 
-        <Route path='/products/ange/pyjamas' element={<PyjamasAnge/>}/>
-        <Route path='/products/ange/pyjamas/:productId' element={<AngeProductPage/>}/>
-       
+        <Route path='/client/products/ange/pyjamas' element={<PyjamasAnge/>}/>
+        <Route path='/client/products/ange/pyjamas/:productId' element={<AngeProductPage/>}/>
+        
 
-        <Route path='/products/ange/nuisettes' element={<Nuisettes/>}/>
-        <Route path='/products/ange/nuisettes/:productId' element={<AngeProductPage/>}/>
-
-
-        <Route path='/products/ange/culottes' element={<Culottes/>}/>
-        <Route path='/products/ange/culottes/:productId' element={<AngeProductPage/>}/>
+        <Route path='/client/products/ange/nuisettes' element={<Nuisettes/>}/>
+        <Route path='/client/products/ange/nuisettes/:productId' element={<AngeProductPage/>}/>
 
 
-        <Route path='/products/ange/soutiens-gorge' element={<SoutiensGorge/>}/>
-        <Route path='/products/ange/soutiens-gorge/:productId' element={<AngeProductPage/>}/>
-
-        <Route path='/products/ange/brassiere' element={<Brassieres/>}/>
-        <Route path='/products/ange/brassiere/:productId' element={<AngeProductPage/>}/>
-
-        <Route path='/products/ange/shorty' element={<Shorty/>}/>
-        <Route path='/products/ange/shorty' element={<AngeProductPage/>}/>
-
-       
-        <Route path='/products/accessories' element={<AccessoriesProducts/>}/>
+        <Route path='/client/products/ange/culottes' element={<Culottes/>}/>
+        <Route path='/client/products/ange/culottes/:productId' element={<AngeProductPage/>}/>
 
 
+        <Route path='/client/products/ange/soutiens-gorge' element={<SoutiensGorge/>}/>
+        <Route path='/client/products/ange/soutiens-gorge/:productId' element={<AngeProductPage/>}/>
 
+        <Route path='/client/products/ange/brassiere' element={<Brassieres/>}/>
+        <Route path='/client//products/ange/brassiere/:productId' element={<AngeProductPage/>}/>
 
+        <Route path='/client/products/ange/shorty' element={<Shorty/>}/>
+        <Route path='/client/products/ange/shorty' element={<AngeProductPage/>}/>
 
-        <Route exact path='/news' element={<News/>}/>
+        
+        <Route path='/client/products/accessories' element={<AccessoriesProducts/>}/>
+        <Route exact path='/client/news' element={<News/>}/>
 
-        <Route exact path='/registration/success' element={<SuccessRegistration/>}/>
-        <Route exact path='/login/success' element={<SuccessLogin/>}/>
+        <Route exact path='/client/registration/success' element={<SuccessRegistration/>}/>
+        <Route exact path='/client/login/success' element={<SuccessLogin/>}/>
+      </Route>
+    </Routes>
+    )
 
-
-
-      </Routes>
-      {/* <Footer/> */}
-    </div>
-  );
+  
 }
 
 export default App;

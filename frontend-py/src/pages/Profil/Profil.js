@@ -24,10 +24,10 @@ function Profil(){
                     <h3>Profil</h3>
                     <div>
                         <ul>
-                            <li><Link to="/profil/infos">Mes infos</Link></li>
-                            <li><Link to="/profil/orders">Mes commandes</Link></li>
-                            <li><Link to="/profil/messages">Mes échanges avec Pyjam'Zz</Link></li>
-                            <li><Link to="/profil/wishlist">Ma liste d'envies</Link></li>
+                            <li><Link to="/client/profil/infos">Mes infos</Link></li>
+                            <li><Link to="/client/profil/orders">Mes commandes</Link></li>
+                            <li><Link to="/client/profil/messages">Mes échanges avec Pyjam'Zz</Link></li>
+                            <li><Link to="/client/profil/wishlist">Ma liste d'envies</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ function Profil(){
             </>
         )
     }else{
-        navigate('/login');
+        navigate('/client/login');
     }
 }
 

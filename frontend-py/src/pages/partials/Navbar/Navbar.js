@@ -20,20 +20,20 @@ function Navbar(){
     if(login){
         return(
             <div className="navbar">
-                <Link to='/' className="logo"></Link>
+                <Link to='/client' className="logo"></Link>
                 <input type="text" className="inputNavbar"/>
-                <Link to="/shoppingcard" className="icon-shopping-card"></Link>
-                <Link to="/profil" className="icon-account"></Link>
+                <Link to="/client/shoppingcard" className="icon-shopping-card"></Link>
+                <Link to="/client/profil" className="icon-account"></Link>
             </div>
             
         ) 
     }else{
         return(
             <div className="navbar">
-                <Link to='/' className="logo"></Link>
+                <Link to='/client' className="logo"></Link>
                 <input type="text" className="inputNavbar"/>
-                <Link to="/shoppingcard" className="icon-shopping-card"></Link>
-                <Link to="/login" className="icon-account"></Link>
+                <Link to="/client/shoppingcard" className="icon-shopping-card"></Link>
+                <Link to="/client/login" className="icon-account"></Link>
             </div>
             
         )

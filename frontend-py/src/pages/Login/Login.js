@@ -11,17 +11,21 @@ function Login(){
     const login = async function(event){
         event.preventDefault()
         try{
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({email: email, password: password})
-            };
-            const data = await fetch('http://localhost:8000/log/login', requestOptions);
-            const element = await data.json();
-            localStorage.setItem('token', element.token);
-            localStorage.setItem('customer', JSON.stringify(element.customer));
-            navigate('/login/success');
-            window.location.reload()
+            if(!email || !password){
+                console.log("need email and password")
+            }else{
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({email: email, password: password})
+                };
+                const data = await fetch('http://localhost:8000/log/login', requestOptions);
+                const element = await data.json();
+                localStorage.setItem('token', element.token);
+                localStorage.setItem('customer', JSON.stringify(element.customer));
+                navigate('/client/login/success');
+                window.location.reload()
+            }
         }catch(e){
             console.log(e)
         }
@@ -43,7 +47,7 @@ function Login(){
                     </div>
                     <button type='submit' className='button-form'>Me connecter</button>
                 </form>
-                <Link to="/registration">M'inscrire</Link>
+                <Link to="/client/registration">M'inscrire</Link>
                 
             </div>
         </>
