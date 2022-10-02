@@ -30,6 +30,9 @@ import Shorty from './pages/AngeProducts/AngeCategory/Shorty';
 import AccessoriesProducts from './pages/AccessoriesProducts/AccessoriesProducts';
 import AngeProductPage from './pages/AngeProducts/AngeProductPage/AngeProductPage';
 
+
+import HomeAdmin from './pages/Admin/Home/HomeAdmin';
+
 function App() {
   
   return(
@@ -80,6 +83,11 @@ function App() {
 
         <Route exact path='/client/registration/success' element={<SuccessRegistration/>}/>
         <Route exact path='/client/login/success' element={<SuccessLogin/>}/>
+      </Route>
+
+
+      <Route exact path='/admin' element={<HomeAdmin/>}>
+        
       </Route>
     </Routes>
     )
