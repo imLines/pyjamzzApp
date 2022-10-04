@@ -17,6 +17,14 @@ function Profil(){
         }
     }, [login])
 
+    const logout = ()=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('customer');
+        navigate('/');
+        window.reload();
+    }
+
+
     if(login){
         return(
             <>
@@ -30,6 +38,7 @@ function Profil(){
                             <li><Link to="/client/profil/wishlist">Ma liste d'envies</Link></li>
                         </ul>
                     </div>
+                    <button onClick={logout}>Me déconnecter</button>
                 </div>
                 <Outlet/>
             </>

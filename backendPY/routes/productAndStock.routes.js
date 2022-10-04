@@ -13,4 +13,4 @@ module.exports = app =>{
     router.post('/new', protected, productAndStock.create); //Rajouter le protected !!!!!
 
     app.use('/product', router);
-}  
+}   

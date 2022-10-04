@@ -2,6 +2,8 @@ import './App.css';
 import {Routes, Route} from 'react-router-dom'
 import Customer from './Customer';
 
+import ProtectedRouteCustomer from './security/auth'
+
 import {SuccessRegistration, SuccessLogin} from './pages/Success/Success';
 
 import Login from './pages/Login/Login';
@@ -31,25 +33,29 @@ import AccessoriesProducts from './pages/AccessoriesProducts/AccessoriesProducts
 import AngeProductPage from './pages/AngeProducts/AngeProductPage/AngeProductPage';
 
 
-import HomeAdmin from './pages/Admin/Home/HomeAdmin';
+import Admin from './Admin';
+import HomeAdmin from './pages/Admin/HomeAdmin/HomeAdmin';
 
 function App() {
   
   return(
     <Routes>
+      <Route exact path='/' element={<Home/>}/>
       <Route exact path='/client' element={<Customer/>}>
-        <Route exact path='/client/home' element={<Home/>}/>
         <Route exact path='/client/shoppingcard' element={<ShoppingCard/>}/>
         <Route exact path='/client/login' element={<Login/>}/>
         <Route exact path='/client/about' element={<About/>}/>
         <Route exact path='/client/registration' element={<Registration/>}/>
+
         
-        <Route exact path='/client/profil' element={<Profil/>}>
-          <Route path='/client/profil/infos' element={<Infos/>}/>
-          <Route path='/client/profil/orders' element={<Orders/>}/>
-          <Route path='/client/profil/messages' element={<Messages/>}/>
-          <Route path='/client/profil/wishlist' element={<WishList/>}/>
-        </Route>
+          <Route exact path='/client/profil' element={<ProtectedRouteCustomer><Profil/></ProtectedRouteCustomer>}>
+            <Route path='/client/profil/infos' element={<Infos/>}/>
+ 
+            <Route path='/client/profil/orders' element={<Orders/>}/>
+            <Route path='/client/profil/messages' element={<Messages/>}/>
+            <Route path='/client/profil/wishlist' element={<WishList/>}/>
+          </Route>
+
 
         <Route path='/client/products' element={<Products/>}/>
 
@@ -82,12 +88,12 @@ function App() {
         <Route exact path='/client/news' element={<News/>}/>
 
         <Route exact path='/client/registration/success' element={<SuccessRegistration/>}/>
-        <Route exact path='/client/login/success' element={<SuccessLogin/>}/>
+        <Route exact path='/client/login/success' element={<ProtectedRouteCustomer><SuccessLogin/></ProtectedRouteCustomer>}/>
       </Route>
 
 
-      <Route exact path='/admin' element={<HomeAdmin/>}>
-        
+      <Route exact path='/admin' element={<Admin/>}>
+        <Route path='/admin/home' element={<HomeAdmin/>}/>
       </Route>
     </Routes>
     )

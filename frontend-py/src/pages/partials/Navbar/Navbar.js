@@ -20,7 +20,7 @@ function Navbar(){
     if(login){
         return(
             <div className="navbar">
-                <Link to='/client' className="logo"></Link>
+                <Link to='/' className="logo"></Link>
                 <input type="text" className="inputNavbar"/>
                 <Link to="/client/shoppingcard" className="icon-shopping-card"></Link>
                 <Link to="/client/profil" className="icon-account"></Link>
@@ -30,7 +30,7 @@ function Navbar(){
     }else{
         return(
             <div className="navbar">
-                <Link to='/client' className="logo"></Link>
+                <Link to='/' className="logo"></Link>
                 <input type="text" className="inputNavbar"/>
                 <Link to="/client/shoppingcard" className="icon-shopping-card"></Link>
                 <Link to="/client/login" className="icon-account"></Link>
