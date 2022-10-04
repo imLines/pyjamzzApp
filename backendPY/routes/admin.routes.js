@@ -20,6 +20,6 @@ module.exports = app => {
 
     
 
-    app.use('/manager', router)
+    app.use('/admin', router)
 
 };  

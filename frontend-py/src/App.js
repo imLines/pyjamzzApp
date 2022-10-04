@@ -2,7 +2,8 @@ import './App.css';
 import {Routes, Route} from 'react-router-dom'
 import Customer from './Customer';
 
-import ProtectedRouteCustomer from './security/auth'
+import ProtectedRouteCustomer from './security/ProtectedRouteCustomer';
+import PrivateRouteAdmin from './security/PrivateRouteAdmin';
 
 import {SuccessRegistration, SuccessLogin} from './pages/Success/Success';
 
@@ -35,6 +36,7 @@ import AngeProductPage from './pages/AngeProducts/AngeProductPage/AngeProductPag
 
 import Admin from './Admin';
 import HomeAdmin from './pages/Admin/HomeAdmin/HomeAdmin';
+import LoginAdmin from './pages/Admin/LoginAdmin/LoginAdmin';
 
 function App() {
   
@@ -92,8 +94,9 @@ function App() {
       </Route>
 
 
-      <Route exact path='/admin' element={<Admin/>}>
-        <Route path='/admin/home' element={<HomeAdmin/>}/>
+      <Route exact path='/admin/login' element={<LoginAdmin/>}/>
+      <Route exact path='/admin/manager' element={<PrivateRouteAdmin><Admin/></PrivateRouteAdmin>}>
+        <Route path='/admin/manager/home' element={<HomeAdmin/>}/>
       </Route>
     </Routes>
     )
