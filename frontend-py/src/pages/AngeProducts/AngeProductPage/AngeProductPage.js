@@ -6,14 +6,10 @@ import './AngeProductPage.css';
 import shop from '../../../config/store';
 
 function AngeProductPage(){
-    const [product, setProduct] = useState(Object);
+    const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(0);
-    const [stock, setStock] = useState([]);
-    const [selectedStock, setSelectedStock] = useState(0)
     const [select, setSelect] = useState(undefined);
     const [size, setSize] = useState(undefined);
-    const [totalStock, setTotalStock] = useState(0);
-    const [inShoppingCard, setInShoppingCard] = useState(false)
     const [shoppingCard, setShoppingCard] = useRecoilState(shop)
 
     let {productId} = useParams();
@@ -25,39 +21,20 @@ function AngeProductPage(){
                 headers: { 'Content-Type': 'application/json' },
             };
             
-            fetch(`http://localhost:8000/product/${productId}`, requestOptions)
-            .then(promise=>{
-                return promise.json()
-            })
+            fetch(`/product/${productId}`, requestOptions)
             .then(data=>{
-                setStock(data.stock);
-                setProduct(data.product)
-                let calculStock = 0;
-                
-                for(let i = 0; i != data.stock.length; i++){
-                    calculStock = calculStock + data.stock[i].stock
-                }
-                setTotalStock(calculStock) 
+                return data.json()
             })
+            .then(productAndSize=>{
+                setProduct(productAndSize.product)
+                setSize(productAndSize.stock)
+            })
+            
         }catch(e){ 
             console.log(e) 
         }
     }, [])
 
-    const resetAll = async (e)=>{
-        console.log(select)
-        if(select != undefined){
-            const cut = select.slice('-');
-            const inStok = parseInt(cut[0])
-            setSelectedStock(inStok)
-            
-        }
-
-
-        setQuantity(0);
-        setSize(undefined);
-        return e;
-    }
 
 
     const downQuantity = (e)=>{
@@ -70,17 +47,8 @@ function AngeProductPage(){
     const upQuantity = (e)=>{
         try{
             e.stopPropagation()
-            if(select == undefined ){
-                alert("ajout impossible, veuillez d'abord choisir une taille.")
-            }else{
-
-                if(quantity == selectedStock){
-                    alert('Vous ne pouvez pas commander plus que le stock disponible')
-                }else{
-                    setQuantity(quantity + 1)
-                }
-            }
-
+            setQuantity(quantity + 1)
+            console.log("shoppingCard: ",shoppingCard)
         }catch(e){
             console.log(e)
         }
@@ -90,40 +58,56 @@ function AngeProductPage(){
     const addInShoppingCard = async (event)=>{
         try{
             event.stopPropagation();
-            event.preventDefault()
-            if(size == undefined || quantity == 0){
-                alert('veuillez choisir au moins 1 article.')
-                return;
-            }
+            event.preventDefault();
             
-            const item = {
-                id: product.id,
-                name: product.name,
-                size: size,
+            let item =  {
+                product: product,
+                size : size,
                 quantity: quantity
-            };
-
-            shoppingCard.forEach((element)=>{
-                if(element.id == item.id && element.size == item.size){
-                    setInShoppingCard(true)
-                    console.log(select.stock, item.quantity)
-                    if((element.stock + item.quantity) <= select.stock){
-                        console.log('LAAA')
-                        element.stock = element.stock + item.quantity
-                    }else{
-                        console.log('La')
-                        return;
-                    }
-                }
-            });
-            if(inShoppingCard == false){
-
-                setShoppingCard(shoppingCard => [...shoppingCard, item])
-                setInShoppingCard(true)
             }
 
-            console.log(shoppingCard)
-          
+            setShoppingCard(current => [...current, item])
+
+
+            //CISCO & TONY
+            // const shopingCardCopy = await shoppingCard.map(function check(e){
+            //     if(e.product.id == item.product.id && e.size == item.size){
+            //         e.quantity += item.quantity
+            //         return e
+            //     }
+
+            //     return e
+            // })
+            // console.log("length of COPY => ",shopingCardCopy)
+            // console.log("length of NEW => ",shoppingCard)
+            
+            // if(JSON.stringify(shoppingCard) == JSON.stringify(shopingCardCopy)){
+            //     console.log('hello')
+            //     shopingCardCopy.push(item)
+            //     setShoppingCard(shopingCardCopy)
+            // }
+            // console.log("COPY => ",shopingCardCopy)
+            // console.log("NEW => ",shoppingCard)
+
+
+            //TONY
+            // console.log(1)
+            // shoppingCard.forEach(element => {
+            //     console.log("ELEMENT = ",element.product.id)
+            //     console.log("ITEM = ",item.product.id)
+            //     if(element.product.id == item.product.id){
+            //         element.quantity += item.quantity
+            //         console.log('equal')
+            //         setInShoppingCard(true)
+            //     }
+            // });
+            // console.log(2, inShoppingCard)
+            // if(inShoppingCard == false){
+            // }
+            // console.log(3)
+            // setInShoppingCard(false)
+            // console.log('FINISH')
+
 
         }catch(e){
             console.log(e)
@@ -147,12 +131,11 @@ function AngeProductPage(){
             </div>
             <div className='info-container'>
                 <div className='name-stock-container'>
-                    <h2>{product.name}</h2>
-                    <p>En stock : {totalStock}</p>
-                    <p></p>
+                    <h2>{product?.name}</h2>
+
                 </div>
                 <div className='price-container'>
-                    <p>{product.priceTTC}€</p>
+                    <p>{product?.priceTTC}€</p>
                 </div>
             </div>
             <form onSubmit={addInShoppingCard}>
@@ -164,10 +147,10 @@ function AngeProductPage(){
                 </div>
                 <div className='row-container'>
                     <label>Taille : </label>
-                    <select name="size" value={select}  onChange={event=>setSelect(resetAll(event.target.value))}>
+                    <select name="size" value={select}  onChange={event=>setSelect()}>
                         <option value={undefined}>Choisir une taille</option>
-                        {stock.map((e, key) => {
-                        return <option key={key}  value={e.stock+'-'+e.size}>{e.size} - {e.stock} en stock</option>;
+                        {size?.map((e, key) => {
+                        return <option key={key}  value={e.size}>{e.size}</option>;
                         })}
                     </select>
                 </div>

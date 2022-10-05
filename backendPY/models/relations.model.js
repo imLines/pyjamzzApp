@@ -38,6 +38,6 @@ Product.hasMany(WishList);
 WishList.belongsTo(Product);
 
 
-//Product
+//Product with stock
 Product.hasMany(Stock);
 Stock.belongsTo(Product);

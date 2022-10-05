@@ -21,9 +21,9 @@ exports.create = async (req, res)=>{
                     Product.create({name, environment, category, description, priceTTC, novelty, color})
                     .then(creating=>{
                         const size = req.body.size;
-                        const stock = req.body.stock;
+                        // const stock = req.body.stock;
                         const productId = creating.dataValues.id;
-                        Stock.create({stock, size, productId})
+                        Stock.create({size, productId})
                         res.status(200).send({message: "The product has just been successfully added."})
                     })
                 }
@@ -53,7 +53,7 @@ exports.findOne = (req, res)=>{
         Product.findOne({raw:true, where: {id: id}})
         .then(product=>{
             if(product){
-                Stock.findAll({raw: true, where:{productId: id}})
+                Stock.findAll({raw: true, where:{productId: id}}) 
                 .then(stock=>{
                     res.status(200).json({product: product, stock: stock})
                 })

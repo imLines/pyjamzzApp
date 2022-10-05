@@ -21,6 +21,9 @@ function Login(){
                 };
                 const data = await fetch('http://localhost:8000/log/login', requestOptions);
                 const element = await data.json();
+                if(!element.token){
+                    return console.log("Error")
+                }
                 localStorage.setItem('token', element.token);
                 localStorage.setItem('customer', JSON.stringify(element.customer));
                 navigate('/client/login/success');
