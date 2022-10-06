@@ -15,10 +15,10 @@ function NavBarAdmin(){
                     <Link to="/admin/profil" className='nav-item'>Profil Admin</Link>
             </header>
             <nav>
-                <Link to='/admin/clientèle' className='nav-item'>Clientèle</Link>
-                <Link to='/admin/produits' className='nav-item'>Produits</Link>
-                <Link to='/admin/commandes' className='nav-item'>Commandes</Link>
-                <Link to='/admin/livraisons' className='nav-item'>Livraison</Link>
+                <Link to='/admin/manager/client' className='nav-item'>Clientèle</Link>
+                <Link to='/admin/manager/products' className='nav-item'>Produits</Link>
+                <Link to='' className='nav-item'>Commandes</Link>
+                <Link to='' className='nav-item'>Livraison</Link>
             </nav>
         </>
     )

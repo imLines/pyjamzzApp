@@ -37,6 +37,9 @@ import AngeProductPage from './pages/AngeProducts/AngeProductPage/AngeProductPag
 import Admin from './Admin';
 import HomeAdmin from './pages/Admin/HomeAdmin/HomeAdmin';
 import LoginAdmin from './pages/Admin/LoginAdmin/LoginAdmin';
+import ProductsAdmin from './pages/Admin/ProductsAdmin/ProductsAdmin';
+import ClientAdmin from './pages/Admin/ClientAdmin/ClientAdmin';
+import ClientPage from './pages/Admin/ClientAdmin/ClientPage';
 
 function App() {
   
@@ -97,6 +100,9 @@ function App() {
       <Route exact path='/admin/login' element={<LoginAdmin/>}/>
       <Route exact path='/admin/manager' element={<PrivateRouteAdmin><Admin/></PrivateRouteAdmin>}>
         <Route path='/admin/manager/home' element={<HomeAdmin/>}/>
+        <Route path='/admin/manager/products' element={<ProductsAdmin/>}/>
+        <Route exact path='/admin/manager/client' element={<ClientAdmin/>}/>
+        <Route path='/admin/manager/client/:id' element={<ClientPage/>}/>
       </Route>
     </Routes>
     )

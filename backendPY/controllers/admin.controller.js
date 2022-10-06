@@ -8,7 +8,7 @@ exports.login = (req, res) =>{
     try{
         const email = req.body.email;
         const password = req.body.password
-
+ 
         Admin.findOne({raw: true, where:{email: email}})
         .then(admin => {
             if(admin){
@@ -26,7 +26,7 @@ exports.login = (req, res) =>{
                 })
 
             }else{
-                res.status(404).send({message: "Aucun utilisateur n'a été trouvé avec cet adress mail."})
+                res.status(400).send({message: "Aucun utilisateur n'a été trouvé avec cet adress mail."})
             }
         });
     }catch(e){

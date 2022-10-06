@@ -34,7 +34,7 @@ exports.create = async (req, res)=>{
     }
 } 
 
-exports.findAll = (req, res)=>{
+exports.findAllByCategory = (req, res)=>{
     try{
         const category = req.params.category;
         Product.findAll({where: {category: category}})
@@ -46,6 +46,18 @@ exports.findAll = (req, res)=>{
         res.status(400)
     }
 } 
+
+exports.findAll = (req, res)=>{
+    try{
+        console.log("OOOOOOOOOOOOOOOOOOO")
+        Product.findAll({})
+        .then(data=>{
+            res.status(200).json({data})
+        })
+    }catch(e){
+        res.status(400).send({message : 'Erreur :'+e})
+    }
+}
 
 exports.findOne = (req, res)=>{
     try{
