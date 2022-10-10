@@ -40,6 +40,8 @@ import LoginAdmin from './pages/Admin/LoginAdmin/LoginAdmin';
 import ProductsAdmin from './pages/Admin/ProductsAdmin/ProductsAdmin';
 import ClientAdmin from './pages/Admin/ClientAdmin/ClientAdmin';
 import ClientPage from './pages/Admin/ClientAdmin/ClientPage';
+import AdminPageProduct from './pages/Admin/ProductsAdmin/AdminPageProduct';
+import CreateProduct from './pages/Admin/ProductsAdmin/CreateProduct/CreateProduct';
 
 function App() {
   
@@ -101,8 +103,10 @@ function App() {
       <Route exact path='/admin/manager' element={<PrivateRouteAdmin><Admin/></PrivateRouteAdmin>}>
         <Route path='/admin/manager/home' element={<HomeAdmin/>}/>
         <Route path='/admin/manager/products' element={<ProductsAdmin/>}/>
+        <Route path='/admin/manager/products/update/:id' element={<AdminPageProduct/>}/>
         <Route exact path='/admin/manager/client' element={<ClientAdmin/>}/>
         <Route path='/admin/manager/client/:id' element={<ClientPage/>}/>
+        <Route path='/admin/manager/products/create' element={<CreateProduct/>}/>
       </Route>
     </Routes>
     )

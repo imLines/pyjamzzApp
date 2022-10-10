@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function ProductsAdmin(){
 
@@ -29,6 +30,7 @@ function ProductsAdmin(){
     return(
         <>
             <h2>Liste de tous les produits </h2>
+            <Link to='/admin/manager/products/create'>Créer un produit</Link>
             <table>
                 <tbody>
                     <tr>
@@ -36,6 +38,7 @@ function ProductsAdmin(){
                         <th scope="col">environnement</th>
                         <th scope="col">categorie</th>
                         <th scope="col">prix</th>
+                        <th scope="col">Modifier</th>
                     </tr>
                     {products?.map((element, index)=>{
                         return(
@@ -44,6 +47,7 @@ function ProductsAdmin(){
                                 <th scope="row">{element?.environment}</th>
                                 <th scope="row">{element?.category}</th>
                                 <th scope="row">{element?.priceTTC}€</th>
+                                <th scope="row"><Link to={`/admin/manager/products/update/${element.id}`}>Modifier</Link></th>
                             </tr>
                         )
                     })}

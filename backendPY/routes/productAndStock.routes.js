@@ -11,7 +11,7 @@ module.exports = app =>{
     router.put('/stock/:id', productAndStock.updateStock);
     router.post('/stock/add/:id', productAndStock.addStock);
     router.delete('/delete/:id', protected,productAndStock.delete);
-    router.post('/new', protected, productAndStock.create); !
+    router.post('/new', protected, productAndStock.create); 
 
     app.use('/product', router);
 }   

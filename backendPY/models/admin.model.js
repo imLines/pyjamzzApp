@@ -10,9 +10,6 @@ const Admin = sequelize.define('admin', {
     password: {
         type: DataTypes.TEXT,
         allowNull: false
-    },
-    additionnalPassword: {
-        type: DataTypes.TEXT
     }
 });
 

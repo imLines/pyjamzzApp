@@ -26,7 +26,7 @@ exports.registration = async (req, res) => {
             }else{
                 res.status(400).send({message: "This email was already used. Please reset your password or choose another email."})
             }
-        })
+        }) 
     }
 };
 
@@ -55,7 +55,7 @@ exports.login = (req, res)=>{
                         const state = customer.state;
                         const email = customer.email;
                         const phone = customer.phone; 
-                        const token = jwt.sign({customerId: id}, process.env.SECRET_KEY_TOKEN_CUSTOMER, {expiresIn: "2h"});
+                        const token = jwt.sign({customerId: id}, process.env.SECRET_KEY_TOKEN_CUSTOMER, {expiresIn: "3h"});
                         res.status(200).json({token: token, customer:{lastName, firstName, sex, adress, adressComplement, country, postalAdress, state, email, phone} });
                     }else{
                         res.status(400).send({message: "Incorrect password."})

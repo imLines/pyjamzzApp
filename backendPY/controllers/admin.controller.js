@@ -18,7 +18,7 @@ exports.login = (req, res) =>{
                     if(valid){
                         const adminId = admin.id;
                         const adminEmail = admin.email;
-                        const adminToken = jwt.sign({token: adminId}, process.env.SECRET_KEY_TOKEN_ADMIN, {expiresIn: "1h"});
+                        const adminToken = jwt.sign({token: adminId}, process.env.SECRET_KEY_TOKEN_ADMIN, {expiresIn: "3h"});
                         res.status(200).json({token: adminToken, admin: adminEmail}); 
                     }else{
                         res.status(400).send({message: "Email ou mot de passe incorrect."})
