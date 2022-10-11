@@ -3,9 +3,10 @@ const Payment = require('./payment.model');
 const Order = require('./payment.model');
 const Delivery = require('./delivery.model');
 const Product = require('./product.model');
-const Stock = require('./stock.model');
+const Size = require('./size.model');
 const WishList = require('./wishList.model');
 const OrderDetails = require('./orderDetails.model');
+const UrlPicturesOfProduct = require('./urlPicturesOfProduct.model');
 
 //Customer
 Customer.hasOne(WishList);
@@ -39,5 +40,9 @@ WishList.belongsTo(Product);
 
 
 //Product with stock
-Product.hasMany(Stock);
-Stock.belongsTo(Product);
+Product.hasMany(Size);
+Size.belongsTo(Product);
+
+//Product with urlPictures
+Product.hasMany(UrlPicturesOfProduct);
+UrlPicturesOfProduct.belongsTo(Product);

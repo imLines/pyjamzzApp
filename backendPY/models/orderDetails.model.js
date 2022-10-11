@@ -3,4 +3,4 @@ const {DataTypes} = require('sequelize');
 
 const OrderDetails = sequelize.define('order details');
 
-module.exports = OrderDetails;
+module.exports = OrderDetails; 

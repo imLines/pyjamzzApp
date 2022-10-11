@@ -26,17 +26,18 @@ require('./models/customer.model');
 require('./models/payment.model');
 require('./models/order.model');
 require('./models/product.model');
-require('./models/stock.model');
+require('./models/size.model');
 require('./models/delivery.model');
 require('./models/relations.model');
 require('./models/wishList.model');
 require('./models/orderDetails.model');
 require('./models/wishList.model');
 require('./models/admin.model');
+require('./models/urlPicturesOfProduct.model');
 
 //Routes
 require('./routes/customer.routes')(app);
-require('./routes/productAndStock.routes')(app);
+require('./routes/productAndSize.routes')(app);
 require('./routes/delivery.routes')(app);
 require('./routes/purchase.routes')(app);
 require('./routes/admin.routes')(app);

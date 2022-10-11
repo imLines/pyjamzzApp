@@ -1,9 +1,9 @@
 const Product = require('../models/product.model');
-const Stock = require('../models/stock.model')
+const Size = require('../models/size.model')
 
 exports.create = async (req, res)=>{
-    if(!req.body.name || !req.body.environment || !req.body.category || !req.body.description || !req.body.priceTTC || !req.body.stock || !req.body.size || req.body.novelty == null || !req.body.color){
-        res.status(400).send({message: "Forgot data."});
+    if(!req.body.name || !req.body.environment || !req.body.category || !req.body.description || !req.body.priceTTC || !req.body.size || req.body.novelty == null || !req.body.color){
+        res.status(400).send({message: "Données manquantes."});
     }else {
         const name = req.body.name;
         const environment = req.body.environment;
@@ -16,15 +16,14 @@ exports.create = async (req, res)=>{
             Product.findOne({raw: true, where: {name: name}})
             .then(data=>{
                 if(data){
-                    res.status(400).send({message: "There is an product with this name."});
+                    res.status(400).send({message: "Il existe déjà un produit avec ce nom. Choisissez un autre nom !"});
                 }else{
                     Product.create({name, environment, category, description, priceTTC, novelty, color})
                     .then(creating=>{
                         const size = req.body.size;
-                        // const stock = req.body.stock;
                         const productId = creating.dataValues.id;
-                        Stock.create({size, productId})
-                        res.status(200).send({message: "The product has just been successfully added."})
+                        Size.create({size, productId})
+                        res.status(200).send({message: "Le produit à été ajouté avec succès."})
                     })
                 }
             })
@@ -49,7 +48,6 @@ exports.findAllByCategory = (req, res)=>{
 
 exports.findAll = (req, res)=>{
     try{
-        console.log("OOOOOOOOOOOOOOOOOOO")
         Product.findAll({})
         .then(data=>{
             res.status(200).json({data})
@@ -65,9 +63,9 @@ exports.findOne = (req, res)=>{
         Product.findOne({raw:true, where: {id: id}})
         .then(product=>{
             if(product){
-                Stock.findAll({raw: true, where:{productId: id}}) 
-                .then(stock=>{
-                    res.status(200).json({product: product, stock: stock})
+                Size.findAll({raw: true, where:{productId: id}}) 
+                .then(size=>{
+                    res.status(200).json({product: product, size: size})
                 })
             }else{
                 res.status(400).send({message: "Aucun article trouvé. désolé."})
@@ -90,7 +88,7 @@ exports.update = (req, res)=>{
         const id = req.params.id;
         Product.update({name, environment, category, description, priceTTC, novelty, color}, {where: {id: id}})
         .then(product=>{
-            res.status(200).send({message: "Product was updated."})
+            res.status(200).send({message: "Le produit à bien été mis à jour."})
         })
     }catch(e){
         res.status(400).send({message: "Error : "+e})
@@ -101,41 +99,53 @@ exports.delete = (req, res)=>{
     try{
         const id = req.params.id;
         Product.destroy({where:{id: id}})
-        .then(()=>{
-            res.status(200).send({message: "Product was deleted."})
+        .then(deleted=>{
+            if(deleted == 0){
+                res.status(400).send({message: "Aucun article n'as été supprimé car une erreur est survenue (article probablement déjà supprimé..)."})
+            }else{
+                res.status(200).send({message: "Le produit à bien été supprimé."})
+            }
         })
     }catch(e){
         res.status(400).send({message: "Erreur : "+e})
     }
 }
 
-exports.updateStock= (req, res)=>{
+exports.updateSize= (req, res)=>{
     try{
+        if(!req.body.newSize){
+            return res.status(400).send({message: "Vous devez impérativement choisir la nouvelle taille pour modifier l'ancienne."})
+        } 
         const productId = req.params.id;
         const size = req.body.size;
-        const newStock = req.body.newStock
-        Stock.update({stock: newStock}, {where: {productId: productId, size: size}})
-        res.status(200).send({message: "Stock was successfull updated !"})
-    }catch(e){
-        res.status(400).send({message: "An error was detected :"+e})
-    }
-}
-
-exports.addStock = (req, res)=>{
-    try{
-        const productId = req.params.id;
-        const size = req.body.size;
-        const stock = req.body.stock;
-        Stock.findOne({raw: true, where: {productId: productId, size: size}})
-        .then(data=>{
-            if(data){
-                res.status(400).send({message: "Vous ne pouvez pas créer deux stock différents pour un même produit & une même taille. Veuillez le mettre simplement à jour."})
+        const newSize = req.body.newSize 
+        Size.update({size: newSize}, {where: {productId: productId, size: size}})
+        .then(updated=>{
+            if(updated[0] == 0){
+                res.status(400).send({message: "Aucun article trouvé avec cet Id ou cette taille. Rien n'as été mis à jour."})
             }else{
-                Stock.create({productId, size, stock})
-                res.status(200).send({message: "Le stock à bien été créé."})
+                res.status(200).send({message: "Taille mise à jour avec succès !"})
             }
         })
     }catch(e){
-        res.status(400).send({message: "Error :"+e})
+        res.status(400).send({message: "Une ereur à été détecté :"+e})
+    }
+}
+
+exports.addSize = (req, res)=>{
+    try{
+        const productId = req.params.id;
+        const size = req.body.size;
+        Size.findOne({raw: true, where: {productId: productId, size: size}})
+        .then(data=>{
+            if(data){
+                res.status(400).send({message: "Vous ne pouvez pas créer deux même tailles  pour un même produit. Veuillez le mettre simplement à jour ou le supprimer."})
+            }else{
+                Size.create({productId, size})
+                res.status(200).send({message: "La taille à bien été créé."})
+            }
+        })
+    }catch(e){
+        res.status(400).send({message: "Erreur :"+e})
     }
 }

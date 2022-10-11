@@ -1,15 +1,11 @@
 const {sequelize} = require('./model');
 const {DataTypes} = require('sequelize');
 
-const Stock = sequelize.define('stock', {
-    // stock: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false
-    // },
+const Size = sequelize.define('size', {
     size: {
         type: DataTypes.STRING,
         allowNull: false
     }
 });
 
-module.exports = Stock;
+module.exports = Size; 
