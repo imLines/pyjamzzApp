@@ -45,7 +45,7 @@ require('./routes/security.routes')(app);
 require('./routes/wishList.routes')(app);
 
 const {sequelize} = require('./models/model');
-sequelize.sync({force: false, alter: true})
+sequelize.sync({force: false, alter: false})
 .then(()=>{
     console.log('Success Sync DB Pyjamzz.');
 })

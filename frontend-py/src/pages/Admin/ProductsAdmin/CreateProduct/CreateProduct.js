@@ -1,67 +1,89 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import storage from '../../../../config/firebase';
 
 function CreateProduct(){
     const [name, setName] = useState('');
-    const [environment, setEnvironment] = useState('');
-    const [category, setCategory] = useState('');
+    const [environment, setEnvironment] = useState(null);
+    const [category, setCategory] = useState(null);
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(0);
+    const [priceInteger, setPriceInteger] = useState(0);
+    const [priceFloat, setPriceFloat] = useState(0);
     const [novelty, setNovelty] = useState(true);
     const [color, setColor] = useState('');
     const [img1, setImg1] = useState('');
     const [img2, setImg2] = useState('');
     const [img3, setImg3] = useState('');
-    const [value, setValue] = useState('')
+    const [url1, setUrl1] = useState('');
+    const [url2, setUrl2] = useState('');
+    const [url3, setUrl3] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate()
 
     const handleSubmit = (e)=>{
         e.preventDefault()
         e.stopPropagation()
         try{
+            
+            storage.ref(`/${environment}/${category}/${name+1}`).put(img1)
+            .on("state_changed", console.log(), alert, () => {
+                // Getting Meta Data Of File
+                storage.ref(`/${environment}/${category}/`).child(name+1).getDownloadURL()
+                .then((url) => {
+                    setUrl1(url);
+                })
+            })
+            storage.ref(`/${environment}/${category}/${name+2}`).put(img2)
+            .on("state_changed", console.log(), alert, () => {
+                // Getting Meta Data Of File
+                storage.ref(`/${environment}/${category}/`).child(name+2).getDownloadURL()
+                .then((url) => {
+                    setUrl2(url);
+                })
+            })
+            storage.ref(`/${environment}/${category}/${name+3}`).put(img3)
+            .on("state_changed", console.log(), alert, () => {
+                // Getting Meta Data Of File
+                storage.ref(`/${environment}/${category}/`).child(name+3).getDownloadURL()
+                .then((url) => {
+                    setUrl3(url);
+                })
+            })
             const token = localStorage.getItem('token');
+            const stringPrice = priceInteger + "." + priceFloat
+            const priceTTC = Number(stringPrice)
+         
+            
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json',
                             'Authorization': token
                 },
-                body: JSON.stringify({name, environment, category, description, price, novelty, color})
+                body: JSON.stringify({name, environment, category, description, priceTTC, novelty, color, url1, url2, url3})
             };
-
-
-            // Sending File to Firebase Storage
-            storage.ref(`/images/${img1.name}`).put(img1)
-            .on("state_changed", alert("success"), alert, () => {
-            // Getting Meta Data Of File
-            storage.ref("images").child(img1.name).getMetadata()
-            .then((data) => {
-                setValue(data);
-                })
+            fetch('/product/new', requestOptions)
+            .then(promise =>{
+                if(promise.status == 201){
+                    navigate('/admin/manager/products')
+                }else{
+                    return promise.json()
+                }
             })
-
-
+            .then(data=>{
+                console.log(data.message)
+                setErrorMessage(data.message)
+            })
         }catch(e){
             console.log(e)
         }
     }
 
-    const test = async (e)=>{
-        e.preventDefault()
-        e.stopPropagation()
-
-        storage.ref(`/images/${img1.name}`).put(img1)
-            .on("state_changed", alert("success"), alert, () => {
-            // Getting Meta Data Of File
-            storage.ref("images").child(img1.name).getMetadata()
-            .then((data) => {
-                setValue(data);
-                console.log(data)
-                })
-            })
-    }
+    
 
 
     return(
         <>
+            <p>{errorMessage}</p>
             <form onSubmit={handleSubmit}>
                 <div className="row-section">
                     <label htmlFor="name">Nom :</label>
@@ -70,6 +92,7 @@ function CreateProduct(){
                 <div className="row-section">
                     <label htmlFor="environment">Environnement :</label>
                     <select name='environment' onChange={event=>setEnvironment(event.target.value)} required>
+                        <option value={null}>Choisir l'environement</option>
                         <option value='ange'>Ange</option>
                         {/* <option value='demon'>Demon</option> */}
                     </select>
@@ -77,6 +100,7 @@ function CreateProduct(){
                 <div className="row-section">
                     <label htmlFor="category">Catégorie :</label>
                     <select name='category' onChange={event=>setCategory(event.target.value)} required>
+                        <option value={null}>Choisir une catégorie</option>
                         <option value='brassiere'>Brassière</option>
                         <option value='culotte'>Culotte</option>
                         <option value='nuisette'>Nuisette</option>
@@ -91,7 +115,8 @@ function CreateProduct(){
                 </div>
                 <div className="row-section">
                     <label htmlFor="price">Prix :</label>
-                    <input name='price' type='number' placeholder="prix" onChange={event=>setPrice(event.target.value)} required/>
+                    <input name='price' type='number' placeholder="euros" onChange={event=>setPriceInteger(event.target.value)} required/>
+                    <input name='price' type='number' placeholder="centimes" onChange={event=>setPriceFloat(event.target.value)} required/>
                 </div>
                 <div className="row-section">
                     <label htmlFor="novelty">Nouveautée : </label>
@@ -114,13 +139,6 @@ function CreateProduct(){
                 </div>
                 <button type='submit'>Créer le produit</button>
             </form>
-                <button onClick={test}>LikeThis</button>
-            <div>
-              <h2>Name : {value?.name}</h2>
-              <h2>Size : {value?.size}</h2>
-              <h2>Path : {value?.fullpath}</h2>
-              <h2>Time : {value?.timeCreated}</h2>
-            </div>
         </>
     )
 };

@@ -27,7 +27,7 @@ function AngeProductPage(){
             })
             .then(productAndSize=>{
                 setProduct(productAndSize.product)
-                setSize(productAndSize.stock)
+                setSize(productAndSize.size)
             })
             
         }catch(e){ 

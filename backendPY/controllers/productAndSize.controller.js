@@ -1,8 +1,9 @@
 const Product = require('../models/product.model');
-const Size = require('../models/size.model')
+const Size = require('../models/size.model');
+const UrlPicturesOfProduct = require('../models/urlPicturesOfProduct.model');
 
 exports.create = async (req, res)=>{
-    if(!req.body.name || !req.body.environment || !req.body.category || !req.body.description || !req.body.priceTTC || !req.body.size || req.body.novelty == null || !req.body.color){
+    if(!req.body.name || !req.body.environment || !req.body.category || !req.body.description || !req.body.priceTTC || req.body.novelty == null || !req.body.color){
         res.status(400).send({message: "Données manquantes."});
     }else {
         const name = req.body.name;
@@ -12,6 +13,9 @@ exports.create = async (req, res)=>{
         const priceTTC = req.body.priceTTC;
         const novelty = req.body.novelty; 
         const color = req.body.color;
+        const url1 = req.body.url1;
+        const url2 = req.body.url2;
+        const url3 = req.body.url3;
         try{
             Product.findOne({raw: true, where: {name: name}})
             .then(data=>{
@@ -19,12 +23,12 @@ exports.create = async (req, res)=>{
                     res.status(400).send({message: "Il existe déjà un produit avec ce nom. Choisissez un autre nom !"});
                 }else{
                     Product.create({name, environment, category, description, priceTTC, novelty, color})
-                    .then(creating=>{
-                        const size = req.body.size;
-                        const productId = creating.dataValues.id;
-                        Size.create({size, productId})
-                        res.status(200).send({message: "Le produit à été ajouté avec succès."})
+                    .then(data=>{
+                        UrlPicturesOfProduct.create({productId: data.dataValues.id, url: url1})
+                        UrlPicturesOfProduct.create({productId: data.dataValues.id, url: url2})
+                        UrlPicturesOfProduct.create({productId: data.dataValues.id, url: url3})
                     })
+                        res.status(201).send({message: "Le produit à été ajouté avec succès."})
                 }
             })
         }catch(e){
