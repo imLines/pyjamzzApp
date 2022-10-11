@@ -10,7 +10,9 @@ function AngeProductPage(){
     const [quantity, setQuantity] = useState(0);
     const [select, setSelect] = useState(undefined);
     const [size, setSize] = useState(undefined);
-    const [shoppingCard, setShoppingCard] = useRecoilState(shop)
+    const [shoppingCard, setShoppingCard] = useRecoilState(shop);
+    const [img, setImg] = useState(null)
+    const [imgPrinc, setImgPrinc] = useState('')
 
     let {productId} = useParams();
 
@@ -25,9 +27,15 @@ function AngeProductPage(){
             .then(data=>{
                 return data.json()
             })
-            .then(productAndSize=>{
-                setProduct(productAndSize.product)
-                setSize(productAndSize.size)
+            .then(productWithSizeAndPictures=>{
+                setProduct(productWithSizeAndPictures.product)
+                setSize(productWithSizeAndPictures.size)
+                setImg({
+                    img1: productWithSizeAndPictures.pictures[0].url,
+                    img2: productWithSizeAndPictures.pictures[1].url,
+                    img3: productWithSizeAndPictures.pictures[2].url
+                })
+                setImgPrinc(img.img1)
             })
             
         }catch(e){ 
@@ -114,19 +122,28 @@ function AngeProductPage(){
         }
     }
 
-    
+    const select1 = ()=>{
+        setImgPrinc(img.img1)
+    }
+    const select2 = ()=>{
+        setImgPrinc(img.img2)
+    }
+    const select3 = ()=>{
+        setImgPrinc(img.img3)
+    }
 
 
     return(
         <>
             <div className='picture-container'>
                 <div className='miniatures-container'>
-                    <img />
-                    <img />
-                    <img />
+                    <button onClick={select1}><img src={img?.img1}/></button>
+                    <button onClick={select2}><img src={img?.img2}/></button>
+                    <button onClick={select3}><img src={img?.img3}/></button>
+                   
                 </div>
                 <div className='actually-image-container'>
-                    <img/>
+                    <img src={imgPrinc}/>
                 </div>
             </div>
             <div className='info-container'>

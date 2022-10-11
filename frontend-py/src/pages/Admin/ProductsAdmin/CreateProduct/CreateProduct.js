@@ -104,9 +104,9 @@ function CreateProduct(){
                         <option value='brassiere'>Brassière</option>
                         <option value='culotte'>Culotte</option>
                         <option value='nuisette'>Nuisette</option>
-                        <option value='pyjamas-ange'>Pyjamas Ange</option>
+                        <option value='pyjamasange'>Pyjamas Ange</option>
                         <option value='shorty'>Shorty</option>
-                        <option value='soutiens-gorge'>Soutiens Gorge</option>
+                        <option value='soutiensgorge'>Soutiens Gorge</option>
                     </select>
                 </div>
                 <div className="row-section">

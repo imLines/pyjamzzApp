@@ -69,7 +69,10 @@ exports.findOne = (req, res)=>{
             if(product){
                 Size.findAll({raw: true, where:{productId: id}}) 
                 .then(size=>{
-                    res.status(200).json({product: product, size: size})
+                    UrlPicturesOfProduct.findAll({where: {productId: id}})
+                    .then(pictures=>{
+                        res.status(200).json({product: product, size: size, pictures})
+                    })
                 })
             }else{
                 res.status(400).send({message: "Aucun article trouvé. désolé."})
