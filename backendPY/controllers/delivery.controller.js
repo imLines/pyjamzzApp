@@ -62,6 +62,6 @@ exports.delete = (req, res)=>{
             res.status(200).send({message: "Delivery selected is delete."})
         })
     }catch(e){
-        res.status(400)/send({message: "Error : "+e});
+        res.status(400).send({message: "Error : "+e});
     }
 } 

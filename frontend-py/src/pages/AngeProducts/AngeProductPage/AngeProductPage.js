@@ -29,14 +29,15 @@ function AngeProductPage(){
             })
             .then(productWithSizeAndPictures=>{
                 setProduct(productWithSizeAndPictures.product)
+                console.log(productWithSizeAndPictures)
                 setSize(productWithSizeAndPictures.size)
                 setImg({
                     img1: productWithSizeAndPictures.pictures[0].url,
                     img2: productWithSizeAndPictures.pictures[1].url,
                     img3: productWithSizeAndPictures.pictures[2].url
                 })
-                setImgPrinc(img.img1)
             })
+            setImgPrinc(img.img1)
             
         }catch(e){ 
             console.log(e) 
@@ -137,13 +138,13 @@ function AngeProductPage(){
         <>
             <div className='picture-container'>
                 <div className='miniatures-container'>
-                    <button onClick={select1}><img src={img?.img1}/></button>
-                    <button onClick={select2}><img src={img?.img2}/></button>
-                    <button onClick={select3}><img src={img?.img3}/></button>
+                    <button onClick={select1}><img alt='permier élément' src={img?.img1}/></button>
+                    <button onClick={select2}><img alt='deuxième élément' src={img?.img2}/></button>
+                    <button onClick={select3}><img alt='troisième élémebt' src={img?.img3}/></button>
                    
                 </div>
                 <div className='actually-image-container'>
-                    <img src={imgPrinc}/>
+                    <img alt='élément-principale' src={imgPrinc || img?.img1}/>
                 </div>
             </div>
             <div className='info-container'>

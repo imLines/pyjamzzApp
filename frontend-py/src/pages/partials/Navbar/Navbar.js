@@ -25,7 +25,7 @@ function Navbar(){
         return(
             <div className="navbar">
                 <Link to='/' className="logo"></Link>
-                <input type="text" className="inputNavbar"/>
+                <input type="text" placeholder="Rechercher..." className="inputNavbar"/>
                 <Link to="/client/shoppingcard" className="icon-shopping-card" onClick={refresh}></Link>
                 <Link to="/client/profil" className="icon-account"></Link>
             </div>
@@ -35,7 +35,7 @@ function Navbar(){
         return(
             <div className="navbar">
                 <Link to='/' className="logo"></Link>
-                <input type="text" className="inputNavbar"/>
+                <input type="text" placeholder="Rechercher..." className="inputNavbar"/>
                 <Link to="/client/shoppingcard" className="icon-shopping-card"></Link>
                 <Link to="/client/login" className="icon-account"></Link>
             </div>

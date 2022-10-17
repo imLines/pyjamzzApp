@@ -75,7 +75,7 @@ exports.findOne = (req, res)=>{
             if(admin){
                 res.status(200).json({admin})
             }else{
-                res.status(404).send({message: "This admin not exist."})
+                res.status(404).send({message: "Cet Administrateur n'existe pas."})
             }
         })
     }catch(e){

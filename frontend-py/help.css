@@ -1,0 +1,16 @@
+/*MOBILE*/
+@media screen and (min-width: 100px) and (max-width: 720px){
+    
+}
+
+/* TABLETTE */
+@media screen and (min-width: 721px) and (max-width: 900px){
+    
+}
+
+
+
+/*DESKTOP*/
+@media  screen and (min-width: 901px){
+    
+}

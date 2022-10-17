@@ -4,7 +4,6 @@ import './Category.css';
 
 function Brassiere(){
     const [products, setProducts] = useState([])
-
     useEffect(()=>{
         try{
             const requestOptions = {
@@ -17,6 +16,7 @@ function Brassiere(){
                 return promise.json()
             }) 
             .then(data=>{
+                console.log(data)
                 setProducts(data.products)
             }) 
         }catch(e){

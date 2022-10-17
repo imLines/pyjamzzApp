@@ -9,7 +9,7 @@ import {SuccessRegistration, SuccessLogin} from './pages/Success/Success';
 
 import Login from './pages/Login/Login';
 import ShoppingCard from './pages/ShoppingCard/ShoppingCard';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 
 import About from './pages/About/About';
 import Registration from './pages/Registration/Registration';

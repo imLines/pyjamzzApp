@@ -45,7 +45,6 @@ exports.findAllByCategory = (req, res)=>{
             res.status(200).json({products: products})
         })
     }catch(e){
-        console.log("Error :"+e)
         res.status(400)
     }
 } 
@@ -154,5 +153,21 @@ exports.addSize = (req, res)=>{
         })
     }catch(e){
         res.status(400).send({message: "Erreur :"+e})
+    }
+}
+
+exports.getImages = (req, res)=>{
+    try{
+        const id = req.params.id;
+        UrlPicturesOfProduct.findAll({where: {id: id}})
+        .then(pictures=>{
+            if(pictures){
+                res.status(200).json(pictures)
+            }else{
+                res.status(400).send({message: "Aucune photo pour ce produit."})
+            }
+        })
+    }catch(e){
+        res.status(400).send({message: 'Erreur: '+e})
     }
 }

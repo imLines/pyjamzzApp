@@ -1,3 +1,4 @@
+
 module.exports = app =>{
     const express = require('express');
     const router = express.Router();
@@ -5,6 +6,7 @@ module.exports = app =>{
     const protected = require('../config/protected.config');
 
     router.get('/all', productAndSize.findAll ); //Rajouter le protected !!!!
+    router.get('/images/:id', productAndSize.getImages);
     router.get('/list/:category', productAndSize.findAllByCategory);
     router.post('/new',  productAndSize.create); 
     router.post('/size/add/:id', productAndSize.addSize);
@@ -13,5 +15,5 @@ module.exports = app =>{
     router.get('/:id', productAndSize.findOne);
     router.post('/:id', productAndSize.update);
 
-    app.use('/product', router);
-}   
+    app.use('/product', router); 
+}    

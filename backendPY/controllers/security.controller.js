@@ -45,18 +45,9 @@ exports.login = (req, res)=>{
                 .then(validate => {
                     if(validate){
                         const id = customer.id; 
-                        const lastName = customer.lastName;
-                        const firstName = customer.firstName; 
-                        const sex = customer.sex;
-                        const adress = customer.adress;
-                        const adressComplement = customer.adressComplement;
-                        const country = customer.country;
-                        const postalAdress = customer.postalAdress;
-                        const state = customer.state;
                         const email = customer.email;
-                        const phone = customer.phone; 
                         const token = jwt.sign({customerId: id}, process.env.SECRET_KEY_TOKEN_CUSTOMER, {expiresIn: "3h"});
-                        res.status(200).json({token: token, customer:{lastName, firstName, sex, adress, adressComplement, country, postalAdress, state, email, phone} });
+                        res.status(200).json({token: token, customer:{email} });
                     }else{
                         res.status(400).send({message: "Incorrect password."})
                     }

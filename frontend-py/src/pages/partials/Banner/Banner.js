@@ -23,12 +23,12 @@ function Banner(){
         <div className="banner" >
             <button className={hamburger} onClick={changeNav}></button>
             <ul className={navLink}>
-                <li><Link to="/client/about">A propos</Link></li>
-                <li><Link to="/client/news">Nouveauté</Link></li>
-                <li><Link to="/client/products">Nos produits</Link></li>
-                <li>Aide</li>
+                <li><Link to="/client/about" className='navigation-item'>A propos</Link></li>
+                <li><Link to="/client/news" className='navigation-item'>Nouveauté</Link></li>
+                <li><Link to="/client/products" className='navigation-item'>Nos produits</Link></li>
+                <li><Link to="/client/help" className='navigation-item'>Aide</Link></li>
             </ul>
-        </div>
+        </div> 
     )
 };
 export default Banner;

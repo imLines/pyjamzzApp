@@ -20,7 +20,7 @@ function CreateProduct(){
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate()
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault()
         e.stopPropagation()
         try{
@@ -51,8 +51,9 @@ function CreateProduct(){
             })
             const token = localStorage.getItem('token');
             const stringPrice = priceInteger + "." + priceFloat
-            const priceTTC = Number(stringPrice)
-         
+            const priceTTC = Number(stringPrice);
+
+            
             
             const requestOptions = {
                 method: 'POST',
@@ -64,7 +65,7 @@ function CreateProduct(){
             fetch('/product/new', requestOptions)
             .then(promise =>{
                 if(promise.status == 201){
-                    navigate('/admin/manager/products')
+                    // navigate('/admin/manager/products')
                 }else{
                     return promise.json()
                 }
@@ -98,7 +99,7 @@ function CreateProduct(){
                     </select>
                 </div>
                 <div className="row-section">
-                    <label htmlFor="category">Catégorie :</label>
+                    <label htmlFor="category">Catégorie :</label> 
                     <select name='category' onChange={event=>setCategory(event.target.value)} required>
                         <option value={null}>Choisir une catégorie</option>
                         <option value='brassiere'>Brassière</option>

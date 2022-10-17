@@ -8,12 +8,9 @@ function decryptAccessToken(req, res, next){
         if(decodedTokenCustomer){
             next();
         }else{
-            if(decodedTokenAdmin){
-                next();
-            }else{
-                res.status(401).send({message: "Vous devez être connecté pour continuer."});
-            }
+            res.status(401).send({message: "Vous devez être connecté pour continuer."});
         }
+        
         
     }catch(e){
         res.status(400).json({e});
