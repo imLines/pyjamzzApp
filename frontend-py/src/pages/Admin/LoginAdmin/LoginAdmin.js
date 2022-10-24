@@ -26,6 +26,7 @@ function LoginAdmin(){
             if(data.status == 400){
                 setError('error')
                 setErrorMessage(informations.message)
+                console.log(informations.message)
                 return
             }
             localStorage.setItem('token', informations.token);
@@ -49,13 +50,13 @@ function LoginAdmin(){
                 <h2>Merci de vous authentifier pour continuer</h2>
                 <form onSubmit={login}>
                     <label htmlFor="email">Email</label>
-                    <input type='email' name="email" className={`${error}`} onChange={event=>setEmail(resetError(event.target.value))}/>
+                    <input required type='email' name="email" className={`${error}`} onChange={event=>setEmail(resetError(event.target.value))}/>
                     <label htmlFor="password">Mot de passe</label>
-                    <input type='password' name='password' className={`${error}`} onChange={event=>setPassword(resetError(event.target.value))}/>
+                    <input required type='password' name='password' className={`${error}`} onChange={event=>setPassword(resetError(event.target.value))}/>
                     <button type="submit">M'identifier</button>
                     <p>{errorMessage}</p>
                 </form>
-            </section>
+            </section> 
         </>
     )
 };

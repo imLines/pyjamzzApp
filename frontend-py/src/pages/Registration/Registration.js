@@ -27,14 +27,6 @@ function Registration(){
 
     const register =  async function (event){
         event.preventDefault();
-        console.log(sex)
-        console.log(lastName)
-        console.log(firstName)
-        console.log(dateOfBirth)
-        console.log(email)
-        console.log(password)
-        console.log(confirmPassword)
-
         try{
             if(!agreeTerm){
                 return alert("Vous devez accepter la politique de confidentialitées & Cookies et les termes et conditions pour vous inscrire.")

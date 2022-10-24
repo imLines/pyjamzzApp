@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ProductsAdmin(){
 
     const [products, setProducts] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         try{
@@ -24,7 +25,29 @@ function ProductsAdmin(){
         }
     }, [])
 
-   
+
+   const deleteProduct = (event, id)=>{
+    event.preventDefault()
+    event.stopPropagation()
+    if(window.confirm("Voulez vous vraiment supprimer ce produit ?")){
+        try{
+            const requestOptions = {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' }
+            };
+            fetch(`/product/delete/${id}`, requestOptions)
+            .then(promise=>{
+                    return promise.json()
+            })
+            .then(response =>{
+                alert(response.message);
+                return window.location.reload()
+            })
+        }catch(e){
+            console.log(e)
+        }
+    }
+   }
 
    
     return(
@@ -39,6 +62,7 @@ function ProductsAdmin(){
                         <th scope="col">categorie</th>
                         <th scope="col">prix</th>
                         <th scope="col">Modifier</th>
+                        <th scope="col">Supprimer</th>
                     </tr>
                     {products?.map((element, index)=>{
                         return(
@@ -48,6 +72,7 @@ function ProductsAdmin(){
                                 <th scope="row">{element?.category}</th>
                                 <th scope="row">{element?.priceTTC}€</th>
                                 <th scope="row"><Link to={`/admin/manager/products/update/${element.id}`}>Modifier</Link></th>
+                                <th scope="row"><button onClick={event=>deleteProduct(event, element.id)}>Supprimer</button> </th>
                             </tr>
                         )
                     })}

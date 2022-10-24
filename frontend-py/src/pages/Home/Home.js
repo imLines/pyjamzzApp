@@ -3,6 +3,7 @@ import Navbar from "../partials/Navbar/Navbar";
 import {Link} from 'react-router-dom';
 
 import './Home.css'
+import Footer from "../partials/Footer/Footer";
 
 function Home(){
     return(
@@ -31,6 +32,7 @@ function Home(){
                 </div>
 
             </div>
+            <Footer/>
         </>
     )
 };

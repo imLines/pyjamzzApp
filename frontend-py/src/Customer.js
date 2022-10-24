@@ -16,7 +16,7 @@ function Customer(){
             <Navbar/>
             <Banner/>
             <Outlet/>
-          {/* <Footer/> */}
+            <Footer/>
         </div>
       );
 }

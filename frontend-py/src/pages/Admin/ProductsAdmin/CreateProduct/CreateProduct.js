@@ -24,13 +24,13 @@ function CreateProduct(){
         e.preventDefault()
         e.stopPropagation()
         try{
-            
+
             storage.ref(`/${environment}/${category}/${name+1}`).put(img1)
             .on("state_changed", console.log(), alert, () => {
                 // Getting Meta Data Of File
                 storage.ref(`/${environment}/${category}/`).child(name+1).getDownloadURL()
                 .then((url) => {
-                    setUrl1(url);
+                    return setUrl1(url);
                 })
             })
             storage.ref(`/${environment}/${category}/${name+2}`).put(img2)
@@ -38,7 +38,7 @@ function CreateProduct(){
                 // Getting Meta Data Of File
                 storage.ref(`/${environment}/${category}/`).child(name+2).getDownloadURL()
                 .then((url) => {
-                    setUrl2(url);
+                    return setUrl2(url);
                 })
             })
             storage.ref(`/${environment}/${category}/${name+3}`).put(img3)
@@ -46,7 +46,7 @@ function CreateProduct(){
                 // Getting Meta Data Of File
                 storage.ref(`/${environment}/${category}/`).child(name+3).getDownloadURL()
                 .then((url) => {
-                    setUrl3(url);
+                    return setUrl3(url);
                 })
             })
             const token = localStorage.getItem('token');
@@ -65,14 +65,13 @@ function CreateProduct(){
             fetch('/product/new', requestOptions)
             .then(promise =>{
                 if(promise.status == 201){
-                    // navigate('/admin/manager/products')
+                    navigate('/admin/manager/products')
                 }else{
                     return promise.json()
                 }
             })
             .then(data=>{
-                console.log(data.message)
-                setErrorMessage(data.message)
+                setErrorMessage(data?.message)
             })
         }catch(e){
             console.log(e)

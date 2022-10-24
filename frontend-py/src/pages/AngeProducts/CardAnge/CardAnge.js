@@ -16,6 +16,7 @@ const CardAnge = function({product}){
                 return promise.json()
             }) 
             .then(data=>{
+                console.log(data)
                 setUrlOfPicture(data[0].url)
             }) 
         }catch(e){

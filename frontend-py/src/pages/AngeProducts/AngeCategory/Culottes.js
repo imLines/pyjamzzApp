@@ -12,7 +12,7 @@ function Culottes(){
                 headers: { 'Content-Type': 'application/json' },
             };
 
-            fetch('http://localhost:8000/product/list/culottes', requestOptions)
+            fetch('http://localhost:8000/product/list/culotte', requestOptions)
             .then(promise=>{
                 return promise.json()
             }) 

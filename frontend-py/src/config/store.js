@@ -5,8 +5,7 @@ const {persistAtom} = recoilPersist();
 const shop = atom({
     key: "shop",
     default: [],
-    effects_UNSTABLE: [persistAtom],
-    dangerouslyAllowMutability: true,
+    effects_UNSTABLE: [persistAtom]
 });
 
 export default shop;

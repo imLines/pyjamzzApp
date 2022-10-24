@@ -159,7 +159,7 @@ exports.addSize = (req, res)=>{
 exports.getImages = (req, res)=>{
     try{
         const id = req.params.id;
-        UrlPicturesOfProduct.findAll({where: {id: id}})
+        UrlPicturesOfProduct.findAll({where: {productId: id}})
         .then(pictures=>{
             if(pictures){
                 res.status(200).json(pictures)

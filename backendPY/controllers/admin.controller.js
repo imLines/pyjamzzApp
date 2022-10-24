@@ -26,7 +26,7 @@ exports.login = (req, res) =>{
                 })
 
             }else{
-                res.status(400).send({message: "Aucun utilisateur n'a été trouvé avec cet adress mail."})
+                res.status(400).send({message: "Aucun administrateur n'a été trouvé avec cette adresse mail."})
             }
         });
     }catch(e){

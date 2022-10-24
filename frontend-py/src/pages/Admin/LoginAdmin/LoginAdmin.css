@@ -1,3 +1,9 @@
 .error{
     border: solid 2px red;
 }
+p{
+    font-size: 10px;
+    padding: 10px;
+    color: red;
+    font-weight: 800;
+}
